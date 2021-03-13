@@ -10,13 +10,15 @@ public:
     Player();
     ~Player();
     //getters
-    std::string getPlayerAmountString();
-    std::regex getRegex();
+
+    std::regex getRegex(unsigned int max_players, std::string* numbers_text);
+    std::map<int, std::regex> get_regex_map(unsigned int max_players, std::string* numbers_text);
+
     //setters
 
     //main functions
     //void initPlayers();
-    int setPlayerAmount(std::string pas);
+    int setPlayerAmount(std::string playerAmountString);
     void setPlayerNames();
 
 

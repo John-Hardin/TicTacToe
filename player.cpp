@@ -4,6 +4,8 @@
 #include <regex>
 #include <array>
 #include <string>
+#include <sstream>
+#include <map>
 #include "player.hpp"
 //#include "board.hpp"
 
@@ -17,17 +19,40 @@
 
     }
     //getters
-    std::string Player::getPlayerAmountString(){return playerAmountString;}
-    std::regex Player::getRegex(){return regex;}
+    
+    std::regex Player::getRegex(unsigned int max_players, std::string* numbers_text){
+        
+        std::stringstream ss;
+        ss << "[1-";
+        ss << max_players;
+        ss << "]";
+        for (unsigned int i = 0; i < max_players; i++){
+            ss << "|";
+            ss << numbers_text[i];
+        }
+        std::string s = "";
+        ss >> s;
+        std::regex regex(s, std::regex::icase);
+        return regex;
+    }
+    std::map<int, std::regex> Player::get_regex_map(unsigned int max_players, std::string* numbers_text){
+        std::map<int, std::regex> convert_table;
+        for(unsigned int i = 0; i < max_players; i++){
+            std::string s = numbers_text[i] + "|" + std::to_string(i+1);
+            std::regex r(s, std::regex::icase);
+            convert_table[i+1] = r;  //todo Get this line explained like I'm 5 years old.
+        }
+        return convert_table;
+    }
+    
     //setters
-
+    
     //main functions
-/*     void Player::initPlayers(){
-          
-    } */
+    
     int Player::setPlayerAmount(std::string playerAmountString){
-        std::string pas;  // Use <regex> to validate input of string to check for 1 or 2, then convert to the integer playerAmount.
-        std::regex regex("[^1-2$]"); //todo update to include multiple variants that could possibly be input, eg. "one player", or "1 player", or "one", etc.etc.etc.
+        const unsigned int max_players = 2;
+        std::string numbers_text[] = {"one", "two", "three", "four"};
+        std::map<int, std::regex> conversion_table = get_regex_map(max_players, numbers_text);
         std::cout << "Enter (1) Player or (2) Players?" << std::endl;
         std::cin >> playerAmountString;
         //template <class CharT, class Traits = std::regex_traits<CharT> > class basic_regex;
@@ -35,26 +60,22 @@
         while(!std::cin.fail()){ 
             // Validate input; copy paste from player.hpp comment-->
             // Use <regex> to validate input of string to check for 1 or 2, then convert to the integer playerAmount.
-            std::cout << "first statement inside while(std::cin.fail()){}; playerAmountString:"<< playerAmountString << std::endl;//todo delete test line
-            std::cout << "std::cin.fail() is : " <<std::cin.fail() << std::endl;
-            if (!std::regex_replace(playerAmountString, regex,)){  //todo fix regex_replace/try regex_replace 3-6 on cppreference.
+            if (!std::regex_match(playerAmountString, regex)){  //todo fix this while loop and if statement, it's acting weird.
             std::cout << "Input not recognized." << std::endl;
-            std::cout << regex_replace(playerAmountString, regex) << std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             
         } else {
-                std::cout << "hello from inside setPlayerAmount(), inside else statement (cin.fail())" << std::endl;
-                std::cout << "std::regex_replace(playerAmountString, regex) is : " << std::regex_replace(playerAmountString, regex) << std::endl; //todo delete this testing line
+/*                 std::cout << "TEST LINE: hello from inside setPlayerAmount(), inside else statement (cin.fail())" << std::endl;
+                std::cout << "TEST LINE: std::regex_replace(playerAmountString, regex) is : " << std::regex_match(playerAmountString, regex) << std::endl; //todo delete this testing line
+ */
 
-                //todo forgot to set playerAmount to correct integer values, do that!
-                std::string m;
-                if (std::regex_replace(playerAmountString, regex, ) == "1"){
-
-                }else {
-
+                for(auto &el: conversion_table){
+                    if (std::regex_match(playerAmountString, el.second)){
+                        std::cout << "Number of players selected is : " << el.first << std::endl;
+                        return this->playerAmount = el.first;
+                    }
                 }
-                return this->playerAmount;
             }
         return 55;
         // End While Loop; playerAmount should be validated first as string input, using <regex>,
@@ -75,7 +96,7 @@
             std::cin >> this->playerTwoName;
         } else {
             // error
-            std::cout << "setPlayerNames() error; made it to else statement." << std::endl;
+            std::cout << "TEST LINE : setPlayerNames() error; made it to else statement." << std::endl;
         }
     }
 
