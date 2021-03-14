@@ -70,8 +70,12 @@
 /*                 std::cout << "TEST LINE: hello from inside setPlayerAmount(), inside else statement (cin.fail())" << std::endl;
                 std::cout << "TEST LINE: std::regex_replace(playerAmountString, regex) is : " << std::regex_match(playerAmountString, regex) << std::endl; //todo delete this testing line
  */ 
+
                 // TODO  check if the above if else statements are actually needed, seems to work without them;
                 // also check what the if statement below does exactly the "el.second" specifically.
+
+
+
                 for(auto &el: conversion_table){
                     if (std::regex_match(playerAmountString, el.second)){
                         std::cout << "Number of players selected is : " << el.first << std::endl;
