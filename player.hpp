@@ -17,21 +17,23 @@ public:
     //setters
 
     //main functions
-    //void initPlayers();
     int setPlayerAmount(std::string playerAmountString);
     void setPlayerNames();
 
 
 
-private:
+private: 
+    std::string playerAmountString;
     int playerAmount;
     char playerOneSymbol;
     char playerTwoSymbol;
-    std::string playerAmountString;
-    std::regex regex;
+    char playerThreeSymbol;
+    char playerFourSymbol;
+
 
     std::string playerOneName;
     std::string playerTwoName;
-    
+    std::string playerThreeName;
+    std::string playerFourName;
     
 };

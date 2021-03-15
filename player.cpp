@@ -9,10 +9,11 @@
 #include "player.hpp"
 //#include "board.hpp"
 
-    Player::Player()
+    Player::Player ()
     {
         setPlayerAmount(playerAmountString);
         setPlayerNames();
+        
     }
     Player::~Player()
     {
@@ -52,7 +53,8 @@
     int Player::setPlayerAmount(std::string playerAmountString){
         const unsigned int max_players = 4;
         std::string numbers_text[] = {"one", "two", "three", "four"};
-        std::map<int, std::regex> conversion_table = get_regex_map(max_players, numbers_text);
+        std::map<int, std::regex> conversion_table = get_regex_map(max_players, numbers_text); //todo conversion_table second el is....  what?
+                                                                                                // and for what first el is it paired with?
         std::cout << "Enter (1) Player or (2) Players?" << std::endl;
         std::cin >> playerAmountString;
         //template <class CharT, class Traits = std::regex_traits<CharT> > class basic_regex;
@@ -60,90 +62,52 @@
         while(!std::cin.fail()){ 
             // Validate input; copy paste from player.hpp comment-->
             // Use <regex> to validate input of string to check for 1 or 2, then convert to the integer playerAmount.
-            
-/*             if (std::regex_search(playerAmountString,matchResult, conversion_table)){  //todo fix this while loop and if statement, it's acting weird.
-            std::cout << "Input not recognized." << std::endl;
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            
-        } else {
-/*                 std::cout << "TEST LINE: hello from inside setPlayerAmount(), inside else statement (cin.fail())" << std::endl;
-                std::cout << "TEST LINE: std::regex_replace(playerAmountString, regex) is : " << std::regex_match(playerAmountString, regex) << std::endl; //todo delete this testing line
- */ 
-
-                // TODO  check if the above if else statements are actually needed, seems to work without them;
-                // also check what the if statement below does exactly the "el.second" specifically.
-
-
 
                 for(auto &el: conversion_table){  // TODO run debugger in this loop and see why it outputs "Input not recognized" multiple times.
                     if (std::regex_match(playerAmountString, el.second)){
                         std::cout << "Number of players selected is : " << el.first << std::endl;
                         return this->playerAmount = el.first;
-                    } else {  
-                        std::cout << "Input not recognized." << std::endl;
-                        std::cin.clear();
-                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  
-                    }
+                    } 
                 }
-        /* } */
-                return 55;
-        // End While Loop; playerAmount should be validated first as string input, using <regex>,
-        // then converted to integer playerAmount and returned.
+                return 1;
         }
-        return 0;
+        return 1;
     }
     void Player::setPlayerNames(){
+            enum swap { ZERO, ONE, TWO, THREE, FOUR };
             switch(this->playerAmount){
-                case 1:
+                case ONE:
                     std::cout << "What is player's Name : ";
                     std::cin >> this->playerOneName;
                     break;
-                case 2:
+                case TWO:
                     std::cout << "What is player's Name : ";
                     std::cin >> this->playerOneName;
                     std::cout << "What is player " << std::to_string(2) << "'s Name : ";
-                    std::cin >> this->playerOneName;
+                    std::cin >> this->playerTwoName;
                     break;
-                case 3:
+                case THREE:
                     std::cout << "What is player's Name : ";
                     std::cin >> this->playerOneName;
                     std::cout << "What is player " << std::to_string(2) << "'s Name : ";
-                    std::cin >> this->playerOneName;
+                    std::cin >> this->playerTwoName;
                     std::cout << "What is player " << std::to_string(3) << "'s Name : ";
-                    std::cin >> this->playerOneName;
+                    std::cin >> this->playerThreeName;
                     break;
-                case 4:
+                case FOUR:
                     std::cout << "What is player's Name : ";
                     std::cin >> this->playerOneName;
                     std::cout << "What is player " << std::to_string(2) << "'s Name : ";
-                    std::cin >> this->playerOneName;
+                    std::cin >> this->playerTwoName;
                     std::cout << "What is player " << std::to_string(3) << "'s Name : ";
-                    std::cin >> this->playerOneName;
+                    std::cin >> this->playerThreeName;
                     std::cout << "What is player " << std::to_string(4) << "'s Name : ";
-                    std::cin >> this->playerOneName;
+                    std::cin >> this->playerFourName;
                     break;
                 default:
                     std::cout << "ERROR in setPlayerAmount" << std::endl;
-                    break;  // todo switch statement should execute all previous cases, eg.: if case
-                            // is 4, it should ask for player 1, 2, 3, and *then* 4's name, currently
-                            // it just goes straight to asking for "player4 Name : "
+                    break;
             }
-
-
-/*         if (this->playerAmount == 1){
-            // one player game
-            std::cout << "What is player's Name : ";
-            std::cin >> this->playerOneName;
-        } else if (this->playerAmount == 2){
-            // two player game
-            std::cout << "What is player one's Name : ";
-            std::cin >> this->playerOneName;
-            std::cout << "What is player two's Name : ";
-            std::cin >> this->playerTwoName;
-        } else {
-            // error
-            std::cout << "TEST LINE : setPlayerNames() error; made it to else statement." << std::endl;
-        } */
+            
     }
 
