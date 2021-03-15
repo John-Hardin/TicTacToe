@@ -76,10 +76,14 @@
 
 
 
-                for(auto &el: conversion_table){
+                for(auto &el: conversion_table){  // TODO run debugger in this loop and see why it outputs "Input not recognized" multiple times.
                     if (std::regex_match(playerAmountString, el.second)){
                         std::cout << "Number of players selected is : " << el.first << std::endl;
                         return this->playerAmount = el.first;
+                    } else {  
+                        std::cout << "Input not recognized." << std::endl;
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  
                     }
                 }
         /* } */
@@ -96,15 +100,27 @@
                     std::cin >> this->playerOneName;
                     break;
                 case 2:
-                    std::cout << "What is player" << std::to_string(2) << " Name : ";
+                    std::cout << "What is player's Name : ";
+                    std::cin >> this->playerOneName;
+                    std::cout << "What is player " << std::to_string(2) << "'s Name : ";
                     std::cin >> this->playerOneName;
                     break;
                 case 3:
-                    std::cout << "What is player" << std::to_string(3) << " Name : ";
+                    std::cout << "What is player's Name : ";
+                    std::cin >> this->playerOneName;
+                    std::cout << "What is player " << std::to_string(2) << "'s Name : ";
+                    std::cin >> this->playerOneName;
+                    std::cout << "What is player " << std::to_string(3) << "'s Name : ";
                     std::cin >> this->playerOneName;
                     break;
                 case 4:
-                    std::cout << "What is player" << std::to_string(4) << " Name : ";
+                    std::cout << "What is player's Name : ";
+                    std::cin >> this->playerOneName;
+                    std::cout << "What is player " << std::to_string(2) << "'s Name : ";
+                    std::cin >> this->playerOneName;
+                    std::cout << "What is player " << std::to_string(3) << "'s Name : ";
+                    std::cin >> this->playerOneName;
+                    std::cout << "What is player " << std::to_string(4) << "'s Name : ";
                     std::cin >> this->playerOneName;
                     break;
                 default:
