@@ -13,6 +13,7 @@ public:
 
     std::regex getRegex(unsigned int max_players, std::string* numbers_text);
     std::map<int, std::regex> get_regex_map(unsigned int max_players, std::string* numbers_text);
+    int getPlayerAmount(){return playerAmount;}
 
     //setters
 
@@ -23,6 +24,7 @@ public:
 
 
 private: 
+    enum swap {ZERO, ONE, TWO, THREE, FOUR} s;// enum for switch statement in setPlayerNames();.
     std::string playerAmountString;
     int playerAmount;
     char playerOneSymbol;

@@ -4,9 +4,9 @@
 
 class Board {
 public:
-    Board();
+    Board(Player*);
     ~Board();
-    void initBoard();
+    void initBoard(Player &PlayerAmount);
 
 
  

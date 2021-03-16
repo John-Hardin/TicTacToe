@@ -1,6 +1,4 @@
 #include "game.hpp"
-/* #include "board.hpp"
-#include "player.hpp" */
 #include <iostream>
 #include <array>
 #include <regex>
@@ -19,7 +17,6 @@ Game::~Game()
 void Game::run(bool& gO){
     Player players;
     Board board;
-    board.initBoard();
     updateGame(gO, &board, &players);
 }
 void Game::updateGame(bool& gO, Board *Board, Player *Players){

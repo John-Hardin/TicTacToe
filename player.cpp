@@ -9,10 +9,12 @@
 #include "player.hpp"
 //#include "board.hpp"
 
-    Player::Player ()
+    Player::Player() 
     {
+
         setPlayerAmount(playerAmountString);
-        setPlayerNames();
+        this->setPlayerNames();
+        /* enum swap { ZERO, ONE, TWO, THREE, FOUR }; // enum for switch statement in setPlayerNames();. */
         
     }
     Player::~Player()
@@ -20,6 +22,7 @@
 
     }
     //getters
+    int Player::getPlayerAmount(){return playerAmount;}
     
     std::regex Player::getRegex(unsigned int max_players, std::string* numbers_text){
         
@@ -73,9 +76,9 @@
         }
         return 1;
     }
-    void Player::setPlayerNames(){
-            enum swap { ZERO, ONE, TWO, THREE, FOUR };
-            switch(this->playerAmount){
+    void Player::setPlayerNames(){ 
+
+            switch(this->s){
                 case ONE:
                     std::cout << "What is player's Name : ";
                     std::cin >> this->playerOneName;
