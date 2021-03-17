@@ -13,7 +13,7 @@
     {
 
         setPlayerAmount(playerAmountString);
-        this->setPlayerNames();
+        setPlayerNames(s);
         /* enum swap { ZERO, ONE, TWO, THREE, FOUR }; // enum for switch statement in setPlayerNames();. */
         
     }
@@ -22,7 +22,7 @@
 
     }
     //getters
-    int Player::getPlayerAmount(){return playerAmount;}
+    //int Player::getPlayerAmount(){return playerAmount;}
     
     std::regex Player::getRegex(unsigned int max_players, std::string* numbers_text){
         
@@ -76,9 +76,9 @@
         }
         return 1;
     }
-    void Player::setPlayerNames(){ 
+    void Player::setPlayerNames(enum swap S){  //todo error here, figure out why.
 
-            switch(this->s){
+            switch(S){
                 case ONE:
                     std::cout << "What is player's Name : ";
                     std::cin >> this->playerOneName;
