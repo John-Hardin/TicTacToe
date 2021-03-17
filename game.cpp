@@ -27,4 +27,6 @@ void Game::updateGame(bool& gO, Board &Board, Player &Player){
         i++;
     }
     gO = true; */
+
+    std::cout << "error : made it to end of game.update()" << std::endl;
 }

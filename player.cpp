@@ -9,21 +9,10 @@
 #include "player.hpp"
 //#include "board.hpp"
 
-    Player::Player() 
-    {
-
-        setPlayerAmount(playerAmountString);
-        setPlayerNames(s);
-        /* enum swap { ZERO, ONE, TWO, THREE, FOUR }; // enum for switch statement in setPlayerNames();. */
-        
-    }
-    Player::~Player()
-    {
-
-    }
-    //getters
-    //int Player::getPlayerAmount(){return playerAmount;}
-    
+//c-tor, d-tor.
+    Player::Player() {setPlayerAmount(playerAmountString); setPlayerNames(playerNames[4], Player::&player);}
+    Player::~Player() {}
+//getters
     std::regex Player::getRegex(unsigned int max_players, std::string* numbers_text){
         
         std::stringstream ss;
@@ -49,24 +38,22 @@
         return convert_table;
     }
     
-    //setters
-    
-    //main functions
+//setters
+
+
+
+//main functions
     
     int Player::setPlayerAmount(std::string playerAmountString){
         const unsigned int max_players = 4;
         std::string numbers_text[] = {"one", "two", "three", "four"};
-        std::map<int, std::regex> conversion_table = get_regex_map(max_players, numbers_text); //todo conversion_table second el is....  what?
-                                                                                                // and for what first el is it paired with?
+        std::map<int, std::regex> conversion_table = get_regex_map(max_players, numbers_text); 
         std::cout << "Enter (1) Player or (2) Players?" << std::endl;
         std::cin >> playerAmountString;
-        //template <class CharT, class Traits = std::regex_traits<CharT> > class basic_regex;
 
         while(!std::cin.fail()){ 
-            // Validate input; copy paste from player.hpp comment-->
-            // Use <regex> to validate input of string to check for 1 or 2, then convert to the integer playerAmount.
 
-                for(auto &el: conversion_table){  // TODO run debugger in this loop and see why it outputs "Input not recognized" multiple times.
+                for(auto &el: conversion_table){  
                     if (std::regex_match(playerAmountString, el.second)){
                         std::cout << "Number of players selected is : " << el.first << std::endl;
                         return this->playerAmount = el.first;
@@ -76,41 +63,19 @@
         }
         return 1;
     }
-    void Player::setPlayerNames(enum swap S){  //todo error here, figure out why.
 
-            switch(S){
-                case ONE:
-                    std::cout << "What is player's Name : ";
-                    std::cin >> this->playerOneName;
-                    break;
-                case TWO:
-                    std::cout << "What is player's Name : ";
-                    std::cin >> this->playerOneName;
-                    std::cout << "What is player " << std::to_string(2) << "'s Name : ";
-                    std::cin >> this->playerTwoName;
-                    break;
-                case THREE:
-                    std::cout << "What is player's Name : ";
-                    std::cin >> this->playerOneName;
-                    std::cout << "What is player " << std::to_string(2) << "'s Name : ";
-                    std::cin >> this->playerTwoName;
-                    std::cout << "What is player " << std::to_string(3) << "'s Name : ";
-                    std::cin >> this->playerThreeName;
-                    break;
-                case FOUR:
-                    std::cout << "What is player's Name : ";
-                    std::cin >> this->playerOneName;
-                    std::cout << "What is player " << std::to_string(2) << "'s Name : ";
-                    std::cin >> this->playerTwoName;
-                    std::cout << "What is player " << std::to_string(3) << "'s Name : ";
-                    std::cin >> this->playerThreeName;
-                    std::cout << "What is player " << std::to_string(4) << "'s Name : ";
-                    std::cin >> this->playerFourName;
-                    break;
-                default:
-                    std::cout << "ERROR in setPlayerAmount" << std::endl;
-                    break;
+    void Player::setPlayerNames(std::vector<std::string> player, Player &player_){
+        player_.playerAmount = getPlayerAmount();
+        std::cout << "TEST : setPlayerNames(), set player.playerAmount." << std::endl;
+        std::string pName;
+        for (auto &it: playerNames){
+            if (this->playerAmount <= playerAmount){
+                std::cin >> pName;
+                playerNames->emplace_back(pName);
+                std::cout << "pName is : " << pName << std::endl;
+
             }
-            
+        }  //todo waiting on array of player names.
+
     }
 

@@ -18,14 +18,14 @@ public:
     //setters
 
     //main functions
-    enum swap {ZERO, ONE, TWO, THREE, FOUR};// enum for switch statement in setPlayerNames();.
-    swap s;
+
     int setPlayerAmount(std::string playerAmountString);
-    void setPlayerNames(enum swap S);
+    void setPlayerNames(std::vector<std::string> player, Player &player_);
 
 
 
 private: 
+    Player *player;
     std::string playerAmountString;
     int playerAmount;
     char playerOneSymbol;
@@ -33,6 +33,7 @@ private:
     char playerThreeSymbol;
     char playerFourSymbol;
 
+    std::vector<std::string> playerNames[4];
     std::string playerOneName;
     std::string playerTwoName;
     std::string playerThreeName;
