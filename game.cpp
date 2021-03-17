@@ -16,10 +16,10 @@ Game::~Game()
 
 void Game::run(bool& gO){
     Player player;
-    Board board;
-    updateGame(gO, &board, &player);
+    Board board(Player);
+    updateGame(gO, Game::board, player);
 }
-void Game::updateGame(bool& gO, Board *Board, Player *Player){
+void Game::updateGame(bool& gO, Board &Board, Player &Player){
 /*     int i = 0;   //todo delete this test code
     while (i < 3){
         std::string inputString;
