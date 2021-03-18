@@ -10,7 +10,7 @@
 //#include "board.hpp"
 
 //c-tor, d-tor.
-    Player::Player() {setPlayerAmount(playerAmountString); setPlayerNames(playerNames[4], Player::&player);}
+    Player::Player() {setPlayerAmount(playerAmountString);}
     Player::~Player() {}
 //getters
     std::regex Player::getRegex(unsigned int max_players, std::string* numbers_text){
@@ -44,7 +44,8 @@
 
 //main functions
     
-    int Player::setPlayerAmount(std::string playerAmountString){
+    //TODO- move this function to Game class.
+    int Player::setPlayerAmount(std::string playerAmountString){ 
         const unsigned int max_players = 4;
         std::string numbers_text[] = {"one", "two", "three", "four"};
         std::map<int, std::regex> conversion_table = get_regex_map(max_players, numbers_text); 
@@ -64,18 +65,22 @@
         return 1;
     }
 
-    void Player::setPlayerNames(std::vector<std::string> player, Player &player_){
-        player_.playerAmount = getPlayerAmount();
-        std::cout << "TEST : setPlayerNames(), set player.playerAmount." << std::endl;
+    void Player::setPlayerNames(std::array<std::string, 4> player, Game &game){  //todo change hardcoded 4 to a variable.
+        int l_playerAmount;
+        l_playerAmount = game.getPlayerAmount();
+        std::cout << "TEST : setPlayerNames(), set l_playerAmount = game.getPlayerAmount()." << std::endl;
+        std::cout << "TEST : l_playerAmount = " << l_playerAmount << std::endl;
         std::string pName;
-        for (auto &it: playerNames){
-            if (this->playerAmount <= playerAmount){
-                std::cin >> pName;
-                playerNames->emplace_back(pName);
-                std::cout << "pName is : " << pName << std::endl;
 
-            }
-        }  //todo waiting on array of player names.
+        for (l_playerAmount <= game.playerNames.size(); auto &el: game.playerNames){
+            std::cin >> pName;
+            game.playerNames.back() = pName;
+            std::cout << "pName is : " << pName << std::endl;
+        }
+
+        
+
+        //todo waiting on array of player names.
 
     }
 

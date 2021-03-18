@@ -1,9 +1,9 @@
 #pragma once
 #include <string>
 #include <regex>
-//#include <array>
+#include <array>
 //#include "board.hpp"
-
+#include "game.hpp"
 
 class Player /* : public Board */{
 public:
@@ -13,30 +13,27 @@ public:
 
     std::regex getRegex(unsigned int max_players, std::string* numbers_text);
     std::map<int, std::regex> get_regex_map(unsigned int max_players, std::string* numbers_text);
-    int getPlayerAmount(){return playerAmount;}
+
 
     //setters
 
     //main functions
 
+    //TODO- move this function to Game class.
     int setPlayerAmount(std::string playerAmountString);
-    void setPlayerNames(std::vector<std::string> player, Player &player_);
+    void setPlayerNames(std::array<std::string, 4> player, Game &game);
 
 
 
-private: 
-    Player *player;
+private:
     std::string playerAmountString;
-    int playerAmount;
+
     char playerOneSymbol;
     char playerTwoSymbol;
     char playerThreeSymbol;
     char playerFourSymbol;
 
-    std::vector<std::string> playerNames[4];
-    std::string playerOneName;
-    std::string playerTwoName;
-    std::string playerThreeName;
-    std::string playerFourName;
+
+
     
 };

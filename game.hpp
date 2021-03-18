@@ -11,8 +11,16 @@ public:
     ~Game();
     void run(bool& gO);
     void updateGame(bool& gO, Board& Board, Player& Player);
-    Player player;
+    Player *players;
     Board board;
+    int getPlayerAmount(){return playerAmount;}
 
+    std::array<std::string, 4> playerNames {playerOneName, playerTwoName, playerThreeName, playerFourName};
+private:
+    int playerAmount;
+    std::string playerOneName;
+    std::string playerTwoName;
+    std::string playerThreeName;
+    std::string playerFourName;
  
 };
