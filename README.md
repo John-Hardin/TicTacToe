@@ -20,6 +20,6 @@
 <h2>Also working on a flowchart for game.run() because I need one, lol</h2>
 <P>Here's my ruff sketch:</P>
 <p align="center">
-<img  class="gamerun_image"border="30" border="blue" src="https://i.ibb.co/MpHyJK3/Sam.jpg" alt="Picture of my dog Sam laying down"   width= 500 height=500>
+<img  class="gamerun_image" border="30" border="blue" src="https://i.ibb.co/MpHyJK3/Sam.jpg" alt="Picture of my dog Sam laying down"   width= 500 height=500>
 </p>
 
