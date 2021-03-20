@@ -5,9 +5,7 @@
 
 class Board {
 public:
-    Player *playerObj;
     Board();
-    Board(Player *players);
     ~Board();
     enum bEnum {THREE = 3, FIVE = 5, SEVEN = 7};
     void initBoard();

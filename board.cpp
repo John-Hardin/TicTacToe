@@ -4,10 +4,7 @@
 #include <iostream>
 #include <array>
 
-    Board::Board(){
-        
-    }
-    Board::Board(Player *players) {  //todo, not using player from board.hpp this way, change this.
+    Board::Board() {  //todo, not using player from board.hpp this way, change this.
         // todo Call initBoard when function is completely writtened'd.
 
 
