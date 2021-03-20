@@ -15,4 +15,4 @@
 <!-- <img src="https://i.ibb.co/vHjX40H/get-Player-Amount-jpeg.jpg" alt="get player amount function flow chart" border="5"> -->
 <h2>Also working on a flowchart for game.run() because I need one, lol</h2>
 <P>Here's my ruff sketch:</P>
-<img src="https://i.ibb.co/MpHyJK3/Sam.jpg" alt="Sam" border="0" width= 500 height=500 style="transform: rotate(90deg)">
+<img src="https://i.ibb.co/MpHyJK3/Sam.jpg" alt="Sam" border="0" width= 500 height=500 style="transform: rotate(90deg); display: flex; align-self: center;">
