@@ -16,5 +16,5 @@
 <h2>Also working on a flowchart for game.run() because I need one, lol</h2>
 <P>Here's my ruff sketch:</P>
 <div style ="display: flex;">
-<img src="https://i.ibb.co/MpHyJK3/Sam.jpg" alt="Sam" border="0" width= 500 height=500 style="transform: rotate(90deg); justify-content: center;">
+<img src="https://i.ibb.co/MpHyJK3/Sam.jpg" alt="Sam" border="0" width= 500 height=500 style="transform: rotate(90deg); margin-left: 120px;">
 </div>
