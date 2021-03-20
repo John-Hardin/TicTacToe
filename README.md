@@ -5,7 +5,7 @@
 
 <img src="https://i.ibb.co/qg0j9Rg/Tic-Tac-Toe.png" alt="Tic Tac Toe game logo.">
 
-<h2>currently working on a draw.io flowchart of an overview of the whole program::cowboy_hat_face:</h2>
+<h2>:cowboy_hat_face: currently working on a draw.io flowchart of an overview of the whole program:</h2>
 <br /><a target='_blank' href='https://imgbb.com/'>upload images to ImgBB.com from here, if you want</a><br />
 
 <!-- https://ibb.co/47xKfrD -->
