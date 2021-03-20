@@ -14,9 +14,20 @@ class Player /* : public Board */{
 public:
     Player();
     ~Player();
-    //getters
 
-    //setters
+    
+    //getters-start
+    std::string getName(){return name_;}
+    char getSymbol(){return symbol_;}
+    int getNumber(){return playerNumber_;}
+    //getters-end
+
+
+    //setters-start
+    void setSymbol(Player &p){symbol_ = p.symbol_;}
+    void setNumber(Player &p){playerNumber_ = p.playerNumber_;}
+    //setters-end
+
 
     //main functions
 

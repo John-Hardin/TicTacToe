@@ -13,7 +13,10 @@
     Player::Player() {}
     Player::~Player() {}
 //getters
-
+    /* getName(){} -- defined in hpp file.
+    *  setSymbol(){} -- defined in hpp file.
+    *
+    */
     
 //setters
 
