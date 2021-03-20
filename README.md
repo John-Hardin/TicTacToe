@@ -15,5 +15,5 @@
 <!-- <img src="https://i.ibb.co/vHjX40H/get-Player-Amount-jpeg.jpg" alt="get player amount function flow chart" border="5"> -->
 <h2>Also working on a flowchart for game.run() because I need one, lol</h2>
 <P>Here's my ruff sketch:</P>
-<img src="https://i.ibb.co/MpHyJK3/Sam.jpg" alt="Picture of my dog Sam laying down" border="30" align="center" width= 500 height=500>
+<img align="center" border="30" src="https://i.ibb.co/MpHyJK3/Sam.jpg" alt="Picture of my dog Sam laying down"   width= 500 height=500>
 
