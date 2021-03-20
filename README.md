@@ -1,4 +1,6 @@
+<!DOCTYPE html>
 
+<body>
 <h1>TicTacToe Single Player, Multiplayer, Online Multiplayer</h1>
 
 <p>Online Multiplayer is a work in progress, sorry.</p>
@@ -18,3 +20,5 @@
 <div style ="display: flex;">
 <img src="https://i.ibb.co/MpHyJK3/Sam.jpg" alt="Sam" border="0" width= 500 height=500 style="transform: rotate(90deg); margin-left: 120px;">
 </div>
+</body>
+</html>
