@@ -23,18 +23,26 @@ void Game::run(bool gO){
     updateGame(gameOver_); //TODO -- may need to pass bool by reference here, somehow, & didn't work.
 }
 void Game::updateGame(bool& gO){
-    //TODO -- need to add in the game logic here; 3/21/2021 time stamp.
+     
+    setPlayerAmount(playerAmountStringForRegex);
+    setPlayerNames(playerNames);
+    //TODO -- need to add game loop here/game logic/while loop;3/21/2021 time stamp.
+    int i=0;
+    do {
+    std::cout << i++ << std::endl;    
+    } while (i < 10);
     std::cout << "error : made it to end of game.update()" << std::endl;
-    return;
+    exit(1);
 }
-    void Game::setPlayerNames(std::array<std::string, 4> playerNames, Game &game){ 
+    void Game::setPlayerNames(std::array<std::string, 4> playerNames){ 
         int l_playerAmount;
-        l_playerAmount = game.getPlayerAmount();
+        l_playerAmount = getPlayerAmount();
         std::cout << "TEST : setPlayerNames(), set l_playerAmount = game.getPlayerAmount()." << std::endl;
         std::cout << "TEST : l_playerAmount = " << l_playerAmount << std::endl;
         std::string pName;
 
-        for (auto &el: playerNames){
+        for (auto &el: playerNames){  //TODO -- Broken here somewhere, cout << el doesn't work, may need l_playername...
+            std::cout << "Enter player " << playerNames.end() << "'s name : " << std::endl;
             std::cin >> pName;
             playerNames.back() = pName;
             std::cout << "pName is : " << pName << std::endl;
