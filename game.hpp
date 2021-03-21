@@ -10,6 +10,7 @@ class Game {
     int *playerAmount;
     std::array<std::string, 4> *playerNames;
     std::string playerAmountStringForRegex;
+    bool gameOver_;
 
 
 
@@ -17,12 +18,13 @@ public:
     Game();
     ~Game();
     void initGame();
-    void run(bool& gO);
+    void run(bool gO);
     void updateGame(bool& gO);
 
 
     //getter
     int getPlayerAmount(){return *playerAmount;}
+    bool getGameOver(){return gameOver_;}
 
     int setPlayerAmount(std::string playerAmountString);
     void setPlayerNames(std::array<std::string, 4> playerNames, Game &game); //3/20/2021

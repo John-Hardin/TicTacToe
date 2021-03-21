@@ -13,12 +13,11 @@
 
 
 
-bool gameOver = false;
 
 int main(){
     Game game;
-    while (!gameOver){
-        game.run(gameOver);
+    while (!game.getGameOver()){
+        game.run(game.getGameOver());
     }
     return 0;
 }

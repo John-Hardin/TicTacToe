@@ -7,6 +7,7 @@
 
 Game::Game()
 {
+    gameOver_ = false;
 
 }
 Game::~Game()
@@ -17,20 +18,14 @@ void Game::initGame(){
     setPlayerAmount(playerAmountStringForRegex);
 }
 
-void Game::run(bool& gO){
+void Game::run(bool gO){
 
-    updateGame(gO);
+    updateGame(gameOver_); //TODO -- may need to pass bool by reference here, somehow, & didn't work.
 }
 void Game::updateGame(bool& gO){
-/*     int i = 0;   //todo delete this test code
-    while (i < 3){
-        std::string inputString;
-        std::getline(std::cin, inputString);
-        i++;
-    }
-    gO = true; */
-
+    //TODO -- need to add in the game logic here; 3/21/2021 time stamp.
     std::cout << "error : made it to end of game.update()" << std::endl;
+    return;
 }
     void Game::setPlayerNames(std::array<std::string, 4> playerNames, Game &game){ 
         int l_playerAmount;
