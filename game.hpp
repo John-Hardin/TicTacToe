@@ -1,5 +1,5 @@
 #pragma once
-#include <array>
+#include <vector>
 #include "player.hpp"
 #include "board.hpp"
 
@@ -7,8 +7,8 @@
 
 class Game { 
 
-    int *playerAmount;
-    std::array<std::string, 4> playerNames;
+    int playerAmount_;
+    std::vector<std::string> playerNames_;  //changed to vector 3/21/2021
     std::string playerAmountStringForRegex;
     bool gameOver_;
 
@@ -23,11 +23,11 @@ public:
 
 
     //getter
-    int getPlayerAmount(){return *playerAmount;}
+    int getPlayerAmount(){return playerAmount_;}
     bool getGameOver(){return gameOver_;}
 
     int setPlayerAmount(std::string playerAmountString);
-    void setPlayerNames(std::array<std::string, 4> playerNames); //3/20/2021
+    void setPlayerNames(std::vector<std::string> &playerNames); //3/20/2021
     std::regex getRegex(unsigned int max_players, std::string numbers_text);
     std::map<int, std::regex> get_regex_map(unsigned int max_players, std::string* numbers_text);
 
