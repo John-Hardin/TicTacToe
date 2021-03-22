@@ -42,31 +42,35 @@ std::map<int, std::regex> conversion_table = get_regex_map(max_players, numbers_
 std::cout << "Enter (1) Player or (2) Players?" << std::endl;
 std::cin >> playerAmountString;
 
-while(!std::cin.fail()){ 
+while(!std::cin.fail() && std::regex_match(playerAmountString, getRegex(max_players, *numbers_text))){ 
 
         for(auto &el: conversion_table){  
             if (std::regex_match(playerAmountString, el.second)){
                 std::cout << "Number of players selected is : " << el.first << std::endl;
-                return playerAmount_ = el.first;
+                playerAmount_ = el.first;
+                std::cout << "TEST 1 : playerAmount_ is : " << playerAmount_ << std::endl;
+
             } 
         }
-        return 1;
+        std::cout << "TEST 2 : playerAmount_ is : " << playerAmount_ << std::endl;
+        return playerAmount_;
 }
 return 1;
 }
 
-void Game::setPlayerNames(std::vector<std::string> &playerNames){ //todo -- Array needs to be dynamic, not hardcoded at 4; needs to be based on int playerAmount.
+void Game::setPlayerNames(std::vector<std::string> &playerNames){ //todo -- Look into "std::unique_ptr<T[]>" instead of vector.
     int l_playerAmount;
     l_playerAmount = getPlayerAmount();
-    std::cout << "TEST 1 : setPlayerNames(), set l_playerAmount = game.getPlayerAmount()." << std::endl;
+    std::cout << "TEST 1 : getPlayerAmount() is : " << getPlayerAmount() << std::endl;
     std::cout << "TEST 2 : l_playerAmount = " << l_playerAmount << std::endl;
     std::string pName;
-
-    for (int i = 1; i <= l_playerAmount; i++){  //TODO -- Broken here somewhere, 3/21/2021 : see comment about dynamic array needed, can't be hardcoded at 4.
+    
+    for (int i = 1; i <= l_playerAmount; i++){  //TODO -- Look into "std::unique_ptr<T[]>" instead of vector.
         std::cout << "Enter player " << i << "'s name : " << std::endl;
         std::cin >> pName;
         playerNames.emplace_back(pName);
-        std::cout << "TEST 3 : pName is : " << pName << std::endl;
+        std::cout << "TEST 3 : vector playerNames.back() is : " << playerNames.back() << std::endl;
+        std::cout << "TEST 4 : pName is : " << pName << std::endl;
     }
 
 
@@ -76,6 +80,7 @@ std::regex Game::getRegex(unsigned int max_players, std::string numbers_text){
 std::stringstream ss;
 ss << "[1-";
 ss << max_players;
+std::cout << "TEST : max_players is " << max_players << std::endl;
 ss << "]";
 for (unsigned int i = 0; i < max_players; i++){
     ss << "|";
@@ -83,6 +88,7 @@ for (unsigned int i = 0; i < max_players; i++){
 }
 std::string s = "";
 ss >> s;
+std::cout << "TEST 2 : s is : " << s << std::endl;
 std::regex regex(s, std::regex::icase);
 return regex;
 }
@@ -93,6 +99,7 @@ std::map<int, std::regex> Game::get_regex_map(unsigned int max_players, std::str
         std::string s = numbers_text[i] + "|" + std::to_string(i+1);
         std::regex r(s, std::regex::icase);
         convert_table[i+1] = r;
+        std::cout << "TEST 3 : convert_table[i] is : " << convert_table[i].mark_count() << std::endl;
     }
     return convert_table;
 }
