@@ -99,9 +99,10 @@ std::map<int, std::regex> Game::get_regex_map(unsigned int max_players, std::str
     std::map<int, std::regex> convert_table;
     for(unsigned int i = 0; i < max_players; i++){
         std::string s = numbers_text[i] + "|" + std::to_string(i+1);
+        std::cout << "TEST 3 : std::string s = numbers_text[i] + \"|\" + std::to_string(i+1); is : " << s << std::endl;
         std::regex r(s, std::regex::icase);
         convert_table[i+1] = r;
-        std::cout << "TEST 3 : convert_table[i] is : " << convert_table[i].mark_count() << std::endl;
+        std::cout << "TEST 4 : convert_table[i] is : " << convert_table[i].mark_count() << std::endl;
     }
     return convert_table;
 }
