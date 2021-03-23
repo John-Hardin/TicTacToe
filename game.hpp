@@ -28,7 +28,7 @@ public:
 
     void setPlayerAmount(std::string &playerAmountString);
     void setPlayerNames(std::vector<std::string> &playerNames); //3/20/2021
-    std::regex getRegex(unsigned int max_players, std::string numbers_text);
+    std::regex getRegex(unsigned int max_players, std::string *numbers_text);
     std::map<int, std::regex> get_regex_map(unsigned int max_players, std::string* numbers_text);
 
 

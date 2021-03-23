@@ -40,24 +40,31 @@ void Game::setPlayerAmount(std::string &playerAmountString){
     const unsigned int max_players = 4;
     std::string numbers_text[] = {"one", "two", "three", "four"};
     std::map<int, std::regex> conversion_table = get_regex_map(max_players, numbers_text); 
+    std::regex regex = getRegex(max_players, numbers_text);
     std::cout << "Enter (1) Player or (2) Players?" << std::endl;
+    
     std::cin >> playerAmountString;
 
-        while(!std::cin.fail() && std::regex_match(playerAmountString, getRegex(max_players, *numbers_text))){ 
+    while (!std::cin.fail()){
 
-                for(auto &el: conversion_table){  
-                    if (std::regex_match(playerAmountString, el.second)){
-                        std::cout << "Number of players selected is : " << el.first << std::endl;
-                        playerAmount_ = el.first;
-                        std::cout << "TEST 1 : playerAmount_ is : " << playerAmount_ << std::endl;
-
-                    } 
+        if (!std::regex_match(playerAmountString, regex)){
+            std::cout << "Input not recognized." << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+        else {
+            for(auto &el: conversion_table){ 
+                if(std::regex_match(playerAmountString, el.second)){
+                    std::cout << "Number of players selected is : " << el.first << std::endl;
+                    playerAmount_ = el.first;
+                    std::cout << "TEST 1 : playerAmount_ is : " << playerAmount_ << std::endl;
                 }
-                std::cout << "TEST 2 : playerAmount_ is : " << playerAmount_ << std::endl;
-                return;
+
+            } 
         }
 
-}
+    }
+}   
 
 void Game::setPlayerNames(std::vector<std::string> &playerNames){ //todo -- Look into "std::unique_ptr<T[]>" instead of vector.
     int l_playerAmount;
@@ -77,7 +84,7 @@ void Game::setPlayerNames(std::vector<std::string> &playerNames){ //todo -- Look
 
 }
 
-std::regex Game::getRegex(unsigned int max_players, std::string numbers_text){
+std::regex Game::getRegex(unsigned int max_players, std::string *numbers_text){
     std::stringstream ss;
     ss << "[1-";
     ss << max_players;
@@ -88,7 +95,6 @@ std::regex Game::getRegex(unsigned int max_players, std::string numbers_text){
         ss << "|";
         ss << numbers_text[i];
     }
-
     std::string s = "";
     ss >> s;
     std::cout << "TEST 2 : s is : " << s << std::endl;
