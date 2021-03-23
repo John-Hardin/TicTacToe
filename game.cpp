@@ -17,6 +17,7 @@ Game::~Game()
 }
 void Game::initGame(){
     setPlayerAmount(playerAmountStringForRegex);
+    std::cout << "TEST IN INITGAME(){} 1 : playerAmountStringForRegex is : " << playerAmountStringForRegex << std::endl;
     setPlayerNames(playerNames_);
 }
 
@@ -35,7 +36,7 @@ void Game::updateGame(bool& gO){
     exit(1);
 }
 
-void Game::setPlayerAmount(std::string playerAmountString){ 
+void Game::setPlayerAmount(std::string &playerAmountString){ 
     const unsigned int max_players = 4;
     std::string numbers_text[] = {"one", "two", "three", "four"};
     std::map<int, std::regex> conversion_table = get_regex_map(max_players, numbers_text); 
@@ -102,7 +103,6 @@ std::map<int, std::regex> Game::get_regex_map(unsigned int max_players, std::str
         std::cout << "TEST 3 : std::string s = numbers_text[i] + \"|\" + std::to_string(i+1); is : " << s << std::endl;
         std::regex r(s, std::regex::icase);
         convert_table[i+1] = r;
-        std::cout << "TEST 4 : convert_table[i] is : " << convert_table[i].mark_count() << std::endl;
     }
     return convert_table;
 }
