@@ -18,7 +18,7 @@ Game::~Game()
 void Game::initGame(){
     setPlayerAmount(playerAmountStringForRegex);
     std::cout << "TEST IN INITGAME(){} 1 : playerAmountStringForRegex is : " << playerAmountStringForRegex << std::endl;
-    setPlayerNames(playerNames_);
+    setPlayerNames(playerNames_, playerAmount_);
 }
 
 void Game::run(bool gO){
@@ -31,8 +31,8 @@ void Game::updateGame(bool& gO){
     int i=0;
     do {
     std::cout << i++ << std::endl;    
-    } while (i < 10);
-    std::cout << "error : made it to end of game.update()" << std::endl;
+    } while (i < 3);
+    std::cout << "test : made it to end of game.update()" << std::endl;
     exit(1);
 }
 
@@ -44,30 +44,32 @@ void Game::setPlayerAmount(std::string &playerAmountString){
     std::cout << "Enter (1) Player or (2) Players?" << std::endl;
     
     std::cin >> playerAmountString;
+    
 
-    while (!std::cin.fail()){
+    while (!std::cin.fail()){ //TODO check Bookmark bar in Chrome for stack exchange page on std::cin.fail().
 
         if (!std::regex_match(playerAmountString, regex)){
             std::cout << "Input not recognized." << std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            setPlayerAmount(playerAmountStringForRegex);
         }
         else {
             for(auto &el: conversion_table){ 
-                if(std::regex_match(playerAmountString, el.second)){
-                    std::cout << "Number of players selected is : " << el.first << std::endl;
-                    playerAmount_ = el.first;
-                    std::cout << "TEST 1 : playerAmount_ is : " << playerAmount_ << std::endl;
-                }
+                    if(std::regex_match(playerAmountString, el.second)){
+                        std::cout << "Number of players selected is : " << el.first << std::endl;
+                        playerAmount_ = el.first;
+                        std::cout << "TEST 1 : playerAmount_ is : " << playerAmount_ << std::endl;
+                    }
 
-            } 
+                } return; // todo figure out a better way to write this; maybe without cin.fail(), and the return. 
         }
 
     }
 }   
 
-void Game::setPlayerNames(std::vector<std::string> &playerNames){ //todo -- Look into "std::unique_ptr<T[]>" instead of vector.
-    int l_playerAmount;
+void Game::setPlayerNames(std::vector<std::string> &playerNames, int& l_playerAmount){ //todo -- Look into "std::unique_ptr<T[]>" instead of vector.
+    /* int l_playerAmount; */
     l_playerAmount = getPlayerAmount();
     std::cout << "TEST 1 : getPlayerAmount() is : " << getPlayerAmount() << std::endl;
     std::cout << "TEST 2 : l_playerAmount = " << l_playerAmount << std::endl;
