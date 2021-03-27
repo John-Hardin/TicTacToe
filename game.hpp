@@ -1,8 +1,7 @@
 #pragma once
 #include <vector>
-#include "player.hpp"
 #include "board.hpp"
-
+#include "player.hpp"
 
 
 class Game { 
@@ -12,14 +11,16 @@ class Game {
     std::string playerAmountStringForRegex;
     bool gameOver_;
     void updateBoard();
-    Game* &P;
+    Player& playerObj;
+    
+    //Player* P;
 
 
 public:
-    Game(std::vector<std::shared_ptr<Game>>);
     Game();
+    Game(std::vector<std::shared_ptr<Game>> players, Player playerObj);
     ~Game();
-    void initGame(Player& P);
+    void initGame(Player* P);
     void run(bool gO);
     void updateGame(bool& gO);
 

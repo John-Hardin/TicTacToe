@@ -3,7 +3,7 @@
 #include <regex>
 #include <array>
 //#include "board.hpp"
-#include "game.hpp"
+//#include "game.hpp"
 
 class Player /* : public Board */{
     

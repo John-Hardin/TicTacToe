@@ -8,15 +8,17 @@
 
 
 
-Game::Game() : Game (players)
+Game::Game(std::vector<std::shared_ptr<Game>> players, Player playerObj)
+: players (players), playerObj (playerObj)
 {   
     gameOver_ = false;
+   
 }
 Game::~Game()
 {
 
 }
-void Game::initGame(Player& P){
+void Game::initGame(Player* P){
     initPlayerObjects(playerAmount_, players);
     setPlayerAmount(playerAmountStringForRegex);
     std::cout << "TEST IN INITGAME(){} 1 : playerAmountStringForRegex is : " << playerAmountStringForRegex << std::endl;
@@ -24,7 +26,9 @@ void Game::initGame(Player& P){
 }
 
 void Game::run(bool gO){
-
+    Player player; //test 12:24pm
+    
+    initGame(&player);
     updateGame(gameOver_); //TODO -- may need to pass bool by reference here, somehow, & didn't work.
 }
 

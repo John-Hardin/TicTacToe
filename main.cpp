@@ -1,5 +1,5 @@
-
 #include "game.hpp"
+
 //#include "board.hpp"
 //#include "player.hpp"
 
@@ -12,10 +12,10 @@
  
 
 
-
+Game game;
 
 int main(){
-    Game game;
+    //Game game;
     while (!game.getGameOver()){
         game.run(game.getGameOver());
     }
