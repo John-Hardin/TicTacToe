@@ -6,21 +6,24 @@
 
 
 class Game { 
-
     int playerAmount_;
     std::vector<std::string> playerNames_;  //changed to vector 3/21/2021
+    std::vector<std::shared_ptr<Game>> &players;
     std::string playerAmountStringForRegex;
     bool gameOver_;
-
+    void updateBoard();
+    Game* &P;
 
 
 public:
+    Game(std::vector<std::shared_ptr<Game>>);
     Game();
     ~Game();
-    void initGame();
+    void initGame(Player& P);
     void run(bool gO);
     void updateGame(bool& gO);
 
+    void initPlayerObjects(int numPlayers, std::vector<std::shared_ptr<Game>> Players);
 
     //getter
     int getPlayerAmount(){return playerAmount_;}

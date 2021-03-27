@@ -5,17 +5,19 @@
 //#include <string>
 
 
-Game::Game()
-{
-    gameOver_ = false;
-    initGame();
 
+
+
+Game::Game() : Game (players)
+{   
+    gameOver_ = false;
 }
 Game::~Game()
 {
 
 }
-void Game::initGame(){
+void Game::initGame(Player& P){
+    initPlayerObjects(playerAmount_, players);
     setPlayerAmount(playerAmountStringForRegex);
     std::cout << "TEST IN INITGAME(){} 1 : playerAmountStringForRegex is : " << playerAmountStringForRegex << std::endl;
     setPlayerNames(playerNames_, playerAmount_);
@@ -28,14 +30,12 @@ void Game::run(bool gO){
 
 void Game::updateGame(bool& gO){
     //TODO -- need to add game loop here/game logic/while loop;3/21/2021 time stamp.
-    int i=0;
-    do {
-    std::cout << i++ << std::endl;    
-    } while (i < 3);
-    std::cout << "test : made it to end of game.update()" << std::endl;
-    exit(1);
-}
 
+    while(gO){
+        updateBoard();
+    }
+}
+void Game::updateBoard(){}
 void Game::setPlayerAmount(std::string &playerAmountString){ 
     const unsigned int max_players = 4;
     std::string numbers_text[] = {"one", "two", "three", "four"};
@@ -45,8 +45,8 @@ void Game::setPlayerAmount(std::string &playerAmountString){
     
     std::cin >> playerAmountString;
     
-
-    while (!std::cin.fail()){ //TODO check Bookmark bar in Chrome for stack exchange page on std::cin.fail().
+// validate input and set number of players in a variable.
+    while (!std::cin.fail()){ 
 
         if (!std::regex_match(playerAmountString, regex)){
             std::cout << "Input not recognized." << std::endl;
@@ -66,6 +66,8 @@ void Game::setPlayerAmount(std::string &playerAmountString){
         }
 
     }
+
+
 }   
 
 void Game::setPlayerNames(std::vector<std::string> &playerNames, int& l_playerAmount){ //todo -- Look into "std::unique_ptr<T[]>" instead of vector.
@@ -84,6 +86,25 @@ void Game::setPlayerNames(std::vector<std::string> &playerNames, int& l_playerAm
     }
 
 
+}
+
+void Game::initPlayerObjects(int numPlayers, std::vector<std::shared_ptr<Game>> Players){
+    // init player objects
+        for(int i = 0; i <= numPlayers; i++){
+            Players.emplace_back(nullptr);
+        }
+        for (auto el: Players){
+        std::shared_ptr<Game> sPtrGame = std::make_shared<Game>();
+        std::cout << "TEST : sPtrGame is : " << sPtrGame << std::endl;
+        }      
+        std::cout << "TEST 2 : returning from Game::initPlayerObjects(int numPlayers, std::vector<std::shared_ptr<Game>> Players){ }" << std::endl;  
+        return;
+/*     for (int i=0; i <= playerAmount_; i++){
+        std::unique_ptr<Player> Players;
+        player.emplace_back(Players.get());
+        std::cout << "TEST: &player[i] is : " << &Players << std::endl;
+
+    } */
 }
 
 std::regex Game::getRegex(unsigned int max_players, std::string *numbers_text){
