@@ -106,12 +106,7 @@ void Game::initPlayerObjects(int numPlayers, std::vector<std::shared_ptr<Game>> 
         }      
         std::cout << "TEST 3 : returning from Game::initPlayerObjects(int numPlayers, std::vector<std::shared_ptr<Game>> Players){ }" << std::endl;  
         return;
-/*     for (int i=0; i <= playerAmount_; i++){
-        std::unique_ptr<Player> Players;
-        player.emplace_back(Players.get());
-        std::cout << "TEST: &player[i] is : " << &Players << std::endl;
 
-    } */
 }
 
 std::regex Game::getRegex(unsigned int max_players, std::string *numbers_text){
