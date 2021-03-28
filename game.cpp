@@ -6,7 +6,10 @@
 
 
 
-
+Game::Game()
+{
+    
+}
 Game::~Game()
 {
 
@@ -18,10 +21,10 @@ Game::~Game()
 } */  //commented out 3/27/2021.
 
 void Game::initGame(){
-    setPlayerAmount(playerAmountStringForRegex);
-    std::cout << "TEST IN INITGAME(){} 1 : playerAmountStringForRegex is : " << playerAmountStringForRegex << std::endl;
+    setPlayerAmount(playerAmountStringForRegex_);
+    std::cout << "TEST IN INITGAME(){} 1 : playerAmountStringForRegex is : " << playerAmountStringForRegex_ << std::endl;
     setPlayerNames(playerNames_, playerAmount_);
-    initPlayerObjects(playerAmount_, players);
+    initPlayerObjects(playerAmount_, players_);
 }
 
 void Game::run(bool gO){
@@ -55,7 +58,7 @@ void Game::setPlayerAmount(std::string &playerAmountString){
             std::cout << "Input not recognized." << std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            setPlayerAmount(playerAmountStringForRegex);
+            setPlayerAmount(playerAmountStringForRegex_);
         }
         else {
             for(auto &el: conversion_table){ 

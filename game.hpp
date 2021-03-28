@@ -1,5 +1,4 @@
 #pragma once
-
 #include <memory>
 #include "board.hpp"
 #include "player.hpp"
@@ -8,8 +7,8 @@
 class Game { 
     int playerAmount_;
     std::vector<std::string> playerNames_;  //changed to vector 3/21/2021
-    std::vector<std::shared_ptr<Game>> players;
-    std::string playerAmountStringForRegex;
+    std::vector<std::shared_ptr<Game>> players_;
+    std::string playerAmountStringForRegex_;
     bool gameOver_;
     void updateBoard();
     //Player playerObj;
