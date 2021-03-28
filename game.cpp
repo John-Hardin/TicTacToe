@@ -8,7 +8,7 @@
 
 Game::Game()
 {
-    
+
 }
 Game::~Game()
 {
@@ -38,7 +38,7 @@ void Game::updateGame(bool& gO){
     //TODO -- need to add game loop here/game logic/while loop;3/21/2021 time stamp.
 
     while(gO){
-        updateBoard();
+        updateBoard();  // TODO LEFT OFF HERE, open loop, or just stalls : 3/27/2021 10:48pm
     }
 }
 void Game::updateBoard(){}
