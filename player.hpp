@@ -1,32 +1,9 @@
 #pragma once
 #include <string>
-#include <regex>
-#include <array>
 
-class Player {
-    
-    std::string name_; //3/20/2021
-    char symbol_;
-    int playerNumber_;
-
-public:
-    Player();
+struct Player{
+    Player(std::string _n, char _s) : name (_n), symbol (_s){}
     ~Player();
-
-    
-    //getters-start
-    std::string getName(){return name_;}
-    char getSymbol(){return symbol_;}
-    int getNumber(){return playerNumber_;}
-    //getters-end
-
-
-    //setters-start
-    void setSymbol(Player &p){symbol_ = p.symbol_;}
-    void setNumber(Player &p){playerNumber_ = p.playerNumber_;}
-    //setters-end
-
-
-    //main functions
-
+    std::string name;
+    char symbol;
 };
