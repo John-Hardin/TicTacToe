@@ -12,14 +12,14 @@ class Game {
     std::string playerAmountStringForRegex;
     bool gameOver_;
     void updateBoard();
-    Player& playerObj;
+    //Player playerObj;
     
-    //Player* P;
+    
 //std::vector<std::shared_ptr<Game>> players, Player& playerObj
 
 public:
     Game();
-    Game(std::vector<std::shared_ptr<Game>> vecOfPlayerPtrs, Player& pObj);
+    /* Game(std::vector<std::shared_ptr<Game>> vecOfPlayerPtrs, Game pObj); */ //commented out 3/27/2021.
     ~Game();
     void initGame();
     void run(bool gO);

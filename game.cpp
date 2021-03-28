@@ -7,20 +7,21 @@
 
 
 
-Game::Game(std::vector<std::shared_ptr<Game>> vecOfPlayerPtrs, Player& pObj) : players (vecOfPlayerPtrs), playerObj (pObj)
-{    
-    gameOver_ = false;
-
-}
 Game::~Game()
 {
 
 }
+/* Game::Game(std::vector<std::shared_ptr<Game>> vecOfPlayerPtrs, Game pObj) : players (vecOfPlayerPtrs), playerObj (pObj)
+{    
+    gameOver_ = false;
+
+} */  //commented out 3/27/2021.
+
 void Game::initGame(){
-    initPlayerObjects(playerAmount_, players);
     setPlayerAmount(playerAmountStringForRegex);
     std::cout << "TEST IN INITGAME(){} 1 : playerAmountStringForRegex is : " << playerAmountStringForRegex << std::endl;
     setPlayerNames(playerNames_, playerAmount_);
+    initPlayerObjects(playerAmount_, players);
 }
 
 void Game::run(bool gO){
