@@ -10,7 +10,7 @@
 <img src="https://i.ibb.co/qg0j9Rg/Tic-Tac-Toe.png" alt="Tic Tac Toe game logo.">
 
 <h2>:cowboy_hat_face: currently working on a draw.io flowchart of an overview of the whole program:</h2>
-<iframe src="https://onedrive.live.com/embed?cid=6837E37DC3AC03E1&resid=6837E37DC3AC03E1%21112&authkey=ADmGsBfbJR7pfys" width="165" height="128" frameborder="0" scrolling="no"></iframe>
+
 <br /><a target='_blank' href='https://imgbb.com/'>upload images to ImgBB.com from here, if you want</a><br />
 
 <!-- https://ibb.co/47xKfrD -->
