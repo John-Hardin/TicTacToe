@@ -2,10 +2,8 @@
 #include <string>
 #include <regex>
 #include <array>
-//#include "board.hpp"
-//#include "game.hpp"
 
-class Player /* : public Board */{
+class Player {
     
     std::string name_; //3/20/2021
     char symbol_;

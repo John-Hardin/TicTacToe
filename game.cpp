@@ -7,18 +7,16 @@
 
 
 
-
-Game::Game(std::vector<std::shared_ptr<Game>> players, Player playerObj)
-: players (players), playerObj (playerObj)
-{   
+Game::Game(std::vector<std::shared_ptr<Game>> vecOfPlayerPtrs, Player& pObj) : players (vecOfPlayerPtrs), playerObj (pObj)
+{    
     gameOver_ = false;
-   
+
 }
 Game::~Game()
 {
 
 }
-void Game::initGame(Player* P){
+void Game::initGame(){
     initPlayerObjects(playerAmount_, players);
     setPlayerAmount(playerAmountStringForRegex);
     std::cout << "TEST IN INITGAME(){} 1 : playerAmountStringForRegex is : " << playerAmountStringForRegex << std::endl;
@@ -26,9 +24,9 @@ void Game::initGame(Player* P){
 }
 
 void Game::run(bool gO){
-    Player player; //test 12:24pm
+    // change to init game function Player player; //test 12:24pm
     
-    initGame(&player);
+    initGame();
     updateGame(gameOver_); //TODO -- may need to pass bool by reference here, somehow, & didn't work.
 }
 
@@ -92,16 +90,17 @@ void Game::setPlayerNames(std::vector<std::string> &playerNames, int& l_playerAm
 
 }
 
-void Game::initPlayerObjects(int numPlayers, std::vector<std::shared_ptr<Game>> Players){
+void Game::initPlayerObjects(int numPlayers, std::vector<std::shared_ptr<Game>> vecOfPlayerPtrs){
     // init player objects
         for(int i = 0; i <= numPlayers; i++){
-            Players.emplace_back(nullptr);
+            std::shared_ptr<Game> sPtrGame = std::make_shared<Game>();
+            vecOfPlayerPtrs.emplace_back(sPtrGame);
+            std::cout << "TEST : sPtrGame is : " << sPtrGame << std::endl;
         }
-        for (auto el: Players){
-        std::shared_ptr<Game> sPtrGame = std::make_shared<Game>();
-        std::cout << "TEST : sPtrGame is : " << sPtrGame << std::endl;
+        for (auto el: vecOfPlayerPtrs){
+            std::cout << "TEST 2 : el: vecOfPlayers is : " << el << std::endl;
         }      
-        std::cout << "TEST 2 : returning from Game::initPlayerObjects(int numPlayers, std::vector<std::shared_ptr<Game>> Players){ }" << std::endl;  
+        std::cout << "TEST 3 : returning from Game::initPlayerObjects(int numPlayers, std::vector<std::shared_ptr<Game>> Players){ }" << std::endl;  
         return;
 /*     for (int i=0; i <= playerAmount_; i++){
         std::unique_ptr<Player> Players;
