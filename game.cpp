@@ -1,10 +1,6 @@
 #include "game.hpp"
 #include <iostream>
-#include <vector>
 #include <regex>
-//#include <string>
-
-
 
 Game::Game()
 {
@@ -14,12 +10,8 @@ Game::~Game()
 {
 
 }
-/* Game::Game(std::vector<std::shared_ptr<Game>> vecOfPlayerPtrs, Game pObj) : players (vecOfPlayerPtrs), playerObj (pObj)
-{    
-    gameOver_ = false;
-
-} */  //commented out 3/27/2021.
-
+/*---------------------------------------------------------------------------------*/
+/*----------------------------------------Game Stuff-------------------------------*/
 void Game::initGame(){
     setPlayerAmount(playerAmountStringForRegex_);
     std::cout << "TEST IN INITGAME(){} 1 : playerAmountStringForRegex is : " << playerAmountStringForRegex_ << std::endl;
@@ -41,7 +33,8 @@ void Game::updateGame(bool& gO){
         updateBoard();  // TODO LEFT OFF HERE, open loop, or just stalls : 3/27/2021 10:48pm
     }
 }
-void Game::updateBoard(){}
+/*-----------------------------------------------------------------------------------*/
+/*------------------------------------------Player Stuff-----------------------------*/
 void Game::setPlayerAmount(std::string &playerAmountString){ 
     const unsigned int max_players = 4;
     std::string numbers_text[] = {"one", "two", "three", "four"};
@@ -70,10 +63,7 @@ void Game::setPlayerAmount(std::string &playerAmountString){
 
                 } return; // todo figure out a better way to write this; maybe without cin.fail(), and the return. 
         }
-
     }
-
-
 }   
 
 void Game::setPlayerNames(std::vector<std::string> &playerNames, int& l_playerAmount){ //todo -- Look into "std::unique_ptr<T[]>" instead of vector.
@@ -97,7 +87,7 @@ void Game::setPlayerNames(std::vector<std::string> &playerNames, int& l_playerAm
 void Game::initPlayerObjects(int numPlayers, std::vector<std::shared_ptr<Game>> vecOfPlayerPtrs){
     // init player objects
         for(int i = 0; i <= numPlayers; i++){
-            std::shared_ptr<Game> sPtrGame = std::make_shared<Game>();
+            std::shared_ptr<Game> sPtrGame = std::make_shared<Game>(Player* p = new Player p);
             vecOfPlayerPtrs.emplace_back(sPtrGame);
             std::cout << "TEST : sPtrGame is : " << sPtrGame << std::endl;
         }
@@ -136,4 +126,12 @@ std::map<int, std::regex> Game::get_regex_map(unsigned int max_players, std::str
         convert_table[i+1] = r;
     }
     return convert_table;
+}
+/*------------------------------------------------------------------------------------*/
+/*-------------------------------------------Board Stuff------------------------------*/
+void Game::updateBoard(){
+
+}
+void Game::printBoard(){
+
 }
