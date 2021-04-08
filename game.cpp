@@ -117,7 +117,7 @@ void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers, s
              //TODO - April 7, 2021; 11:51pm, ***smashing stack***, something is overrunning a buffer, likely the if statement and/or for loop are out of order or something.
             std::cout << "arrayHoldingSmartPointers.at(players_.size()) : " << arrayHoldingSmartPointers.at(players_.size()) << std::endl;
             std::cout << "p1.use_count INside for loop is : " << p1.use_count() << std::endl;
-            i++; std::cout << "i is " << i << std::endl;
+            i++; std::cout << "i is " << i << std::endl;  //TODO - April 8, 2021; 5:50 am, try adding: p1->name_() or p1->getName() here and 2 lines below.
     }   
                 std::cout << "p1.use_count OUTside for loop is : " << p1.use_count() << std::endl;
 }
