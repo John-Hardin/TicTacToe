@@ -15,7 +15,7 @@ Game::~Game()
 }
 /*---------------------------------------------------------------------------------*/
 /*----------------------------------------Game Stuff-------------------------------*/
-void Game::initGame(std::string playerAmountStringForRegex_, int playerAmount_, std::vector<std::shared_ptr<Player>> &players_){  //TODO - April 7, 2021; 8:45pm, added the arguments here, but they are probably wrong.
+void Game::initGame(std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::shared_ptr<Player>> &players_){  //TODO - April 7, 2021; 8:45pm, added the arguments here, but they are probably wrong.
 /*     setPlayerAmount(playerAmountStringForRegex_);
     std::cout << "TEST IN INITGAME(){} 1 : playerAmountStringForRegex is : " << playerAmountStringForRegex_ << std::endl; */
     
@@ -97,12 +97,11 @@ void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers, s
     // init player objects
     std::string inputone;
     char inputtwo;
-    std::shared_ptr<Player> p1, p2, p3, p4;
     std::array<std::shared_ptr<Player>, 4> arrayHoldingSmartPointers{p1, p2, p3, p4};
     std::cout << "TEST: arrayHoldingSmartPointers.size() is : " << arrayHoldingSmartPointers.size() << std::endl;
     std::cout << "TEST: players_.size() is : " << players_.size() << std::endl;
     int count = 1;
-    for(auto &el: arrayHoldingSmartPointers){
+    for(auto el: arrayHoldingSmartPointers){
         if(numPlayers >= count){
             std::cout << "Enter player "<< count << "'s name : ";
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -119,13 +118,13 @@ void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers, s
             ++count;
             std::cout << count << std::endl;
 
-        }
+        }  //TODO - April 7, 2021; 11:51pm, ***smashing stack***, something is overrunning a buffer, likely the if statement and/or for loop are out of order or something.
         
     }   
-    std::cout << "T : p1->name is : " << p1->getName() << std::endl;
-    std::cout << "T : p2->name is : " << p2->getName() << std::endl;
-    std::cout << "T : p3->name is : " << p3->getName() << std::endl;
-    std::cout << "T : p4->name is : " << p4->getName() << std::endl;
+    // std::cout << "T : p1->name is : " << p1->name_ << std::endl;
+/*     std::cout << "T : p2->name is : " << p2->name_ << std::endl;
+    std::cout << "T : p3->name is : " << p3->name_ << std::endl;
+    std::cout << "T : p4->name is : " << p4->name_ << std::endl; */
 }
 
 std::regex Game::getRegex(unsigned int max_players, std::string *numbers_text){

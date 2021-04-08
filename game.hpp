@@ -11,6 +11,7 @@ class Game {
     int playerAmount_;
     bool gameOver_;
     std::string playerAmountStringForRegex_;
+    std::shared_ptr<Player> p1, p2, p3, p4;
     std::vector<std::shared_ptr<Player>> players_;
     //std::vector<std::string> playerNames_;  //changed to vector 3/21/2021
     void updateBoard();
@@ -21,11 +22,11 @@ class Game {
 public:
     Game();
     ~Game();
-    void initGame(std::string playerAmountStringForRegex_, int playerAmount_, std::vector<std::shared_ptr<Player>> &players_);
+    void initGame(std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::shared_ptr<Player>> &players_);
     void run(bool gO);
     void updateGame(bool& gO);
 
-    void initPlayerObjects(std::string &playerAmountString, int &numPlayers, std::vector<std::shared_ptr<Player>> &players_);
+    void initPlayerObjects(std::string &playerAmountString, int &playerAmount_, std::vector<std::shared_ptr<Player>> &players_);
 
     
     void setPlayerAmount(std::string &playerAmountString);
