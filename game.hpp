@@ -22,11 +22,11 @@ class Game {
 public:
     Game();
     ~Game();
-    void initGame(std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::shared_ptr<Player>> &players_);
+    void initGame(std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::shared_ptr<Player>> players_);
     void run(bool gO);
     void updateGame(bool& gO);
 
-    void initPlayerObjects(std::string &playerAmountString, int &playerAmount_, std::vector<std::shared_ptr<Player>> &players_);
+    void initPlayerObjects(std::string &playerAmountString, int &playerAmount_, std::vector<std::shared_ptr<Player>> players_);
 
     
     void setPlayerAmount(std::string &playerAmountString);

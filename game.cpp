@@ -15,7 +15,7 @@ Game::~Game()
 }
 /*---------------------------------------------------------------------------------*/
 /*----------------------------------------Game Stuff-------------------------------*/
-void Game::initGame(std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::shared_ptr<Player>> &players_){  //TODO - April 7, 2021; 8:45pm, added the arguments here, but they are probably wrong.
+void Game::initGame(std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::shared_ptr<Player>> players_){  //TODO - April 7, 2021; 8:45pm, added the arguments here, but they are probably wrong.
 /*     setPlayerAmount(playerAmountStringForRegex_);
     std::cout << "TEST IN INITGAME(){} 1 : playerAmountStringForRegex is : " << playerAmountStringForRegex_ << std::endl; */
     
@@ -34,7 +34,8 @@ void Game::updateGame(bool& gO){
     //TODO -- need to add game loop here/game logic/while loop;3/21/2021 time stamp.
 
     while(gO){
-        updateBoard();  // TODO LEFT OFF HERE, open loop, or just stalls : 3/27/2021 10:48pm
+        updateBoard();
+        gameOver_ = true;  // TODO - toggle to end game gracefully vs leaving it open loop ended.
     }
 }
 /*-----------------------------------------------------------------------------------*/
@@ -62,7 +63,7 @@ void Game::setPlayerAmount(std::string &playerAmountString){
                     if(std::regex_match(playerAmountString, el.second)){
                         std::cout << "Number of players selected is : " << el.first << std::endl;
                         playerAmount_ = el.first;
-                        std::cout << "TEST 1 : playerAmount_ is : " << playerAmount_ << std::endl;
+                        std::cout << "playerAmount_ is : " << playerAmount_ << std::endl;
                     }
 
                 } return; // todo figure out a better way to write this; maybe without cin.fail(), and the return. 
@@ -88,43 +89,37 @@ void Game::setPlayerAmount(std::string &playerAmountString){
 
 } */
 
-void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers, std::vector<std::shared_ptr<Player>> &players_){
+void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers, std::vector<std::shared_ptr<Player>> players_){
     //set number of players
     setPlayerAmount(playerAmountStringForRegex_);
-    std::cout << "TEST IN INITGAME(){} 1 : playerAmountStringForRegex is : " << playerAmountStringForRegex_ << std::endl;
-    std::cout << "TEST: numPlayers is : " << numPlayers << std::endl;
+    std::cout << "playerAmountStringForRegex is : " << playerAmountStringForRegex_ << std::endl;
+    std::cout << "numPlayers is : " << numPlayers << std::endl;
 
     // init player objects
     std::string inputone;
     char inputtwo;
     std::array<std::shared_ptr<Player>, 4> arrayHoldingSmartPointers{p1, p2, p3, p4};
-    std::cout << "TEST: arrayHoldingSmartPointers.size() is : " << arrayHoldingSmartPointers.size() << std::endl;
-    std::cout << "TEST: players_.size() is : " << players_.size() << std::endl;
-    int count = 1;
-    for(auto el: arrayHoldingSmartPointers){
-        if(numPlayers >= count){
-            std::cout << "Enter player "<< count << "'s name : ";
+    std::cout << "T : arrayHoldingSmartPointers.size() is : " << arrayHoldingSmartPointers.size() << std::endl;
+    std::cout << "T : players_.size() is : " << players_.size() << std::endl;
+    int i = 1;
+    while(numPlayers >= i){
+            std::cout << "Enter player "<< i << "'s name : ";
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cin >> inputone; // string name _N
-            std::cout << "Enter player " << count  << "'s symbol : ";
+            std::cout << "Enter player " << i  << "'s symbol : ";
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cin >> inputtwo; // char symbol _S
-            players_.emplace_back(arrayHoldingSmartPointers[players_.size()] = std::make_shared<Player>(inputone, inputtwo));  //TODO -- LEFT OFF HERE--- April 6, 2021; 12:12pm.
-            std::cout << "TEST: inputone inputtwo are : " << inputone << " " << inputtwo << std::endl;
+            players_.push_back(arrayHoldingSmartPointers[players_.size()] = std::make_shared<Player>(inputone, inputtwo));  //TODO -- LEFT OFF HERE--- April 6, 2021; 12:12pm.
+            std::cout << "inputone inputtwo are : " << inputone << " " << inputtwo << std::endl;
             //std::cin.clear();
-            std::cout << "TEST: numPlayers is : " << numPlayers << std::endl;
-            std::cout << "TEST: players_.size() is : " << players_.size() << std::endl;
-            std::cout << &el << std::endl;
-            ++count;
-            std::cout << count << std::endl;
-
-        }  //TODO - April 7, 2021; 11:51pm, ***smashing stack***, something is overrunning a buffer, likely the if statement and/or for loop are out of order or something.
-        
+            std::cout << "numPlayers is : " << numPlayers << std::endl;
+            std::cout << "players_.size() is : " << players_.size() << std::endl;
+             //TODO - April 7, 2021; 11:51pm, ***smashing stack***, something is overrunning a buffer, likely the if statement and/or for loop are out of order or something.
+            std::cout << "arrayHoldingSmartPointers.at(players_.size()) : " << arrayHoldingSmartPointers.at(players_.size()) << std::endl;
+            std::cout << "p1.use_count INside for loop is : " << p1.use_count() << std::endl;
+            i++; std::cout << "i is " << i << std::endl;
     }   
-    // std::cout << "T : p1->name is : " << p1->name_ << std::endl;
-/*     std::cout << "T : p2->name is : " << p2->name_ << std::endl;
-    std::cout << "T : p3->name is : " << p3->name_ << std::endl;
-    std::cout << "T : p4->name is : " << p4->name_ << std::endl; */
+                std::cout << "p1.use_count OUTside for loop is : " << p1.use_count() << std::endl;
 }
 
 std::regex Game::getRegex(unsigned int max_players, std::string *numbers_text){
@@ -140,7 +135,7 @@ std::regex Game::getRegex(unsigned int max_players, std::string *numbers_text){
     }
     std::string s = "";
     ss >> s;
-    std::cout << "TEST 2 : s is : " << s << std::endl;
+    std::cout << "s is : " << s << std::endl;
     std::regex regex(s, std::regex::icase);
     return regex;
 }
@@ -149,7 +144,7 @@ std::map<int, std::regex> Game::get_regex_map(unsigned int max_players, std::str
     std::map<int, std::regex> convert_table;
     for(unsigned int i = 0; i < max_players; i++){
         std::string s = numbers_text[i] + "|" + std::to_string(i+1);
-        std::cout << "TEST 3 : std::string s = numbers_text[i] + \"|\" + std::to_string(i+1); is : " << s << std::endl;
+        std::cout << "std::string s = numbers_text[i] + \"|\" + std::to_string(i+1); is : " << s << std::endl;
         std::regex r(s, std::regex::icase);
         convert_table[i+1] = r;
     }
