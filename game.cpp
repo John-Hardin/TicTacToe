@@ -1,6 +1,9 @@
 #include "game.hpp"
-#include <iostream>
-#include <regex>
+#include <limits>
+//#include "player.hpp"
+//#include <iostream>
+//#include <regex>
+
 
 Game::Game()
 {
@@ -12,17 +15,18 @@ Game::~Game()
 }
 /*---------------------------------------------------------------------------------*/
 /*----------------------------------------Game Stuff-------------------------------*/
-void Game::initGame(){
-    setPlayerAmount(playerAmountStringForRegex_);
-    std::cout << "TEST IN INITGAME(){} 1 : playerAmountStringForRegex is : " << playerAmountStringForRegex_ << std::endl;
-    setPlayerNames(playerNames_, playerAmount_);
-    initPlayerObjects(playerAmount_, players_);
+void Game::initGame(std::string playerAmountStringForRegex_, int playerAmount_, std::vector<std::shared_ptr<Player>> &players_){  //TODO - April 7, 2021; 8:45pm, added the arguments here, but they are probably wrong.
+/*     setPlayerAmount(playerAmountStringForRegex_);
+    std::cout << "TEST IN INITGAME(){} 1 : playerAmountStringForRegex is : " << playerAmountStringForRegex_ << std::endl; */
+    
+    //setPlayerNames(playerNames_, playerAmount_);
+    initPlayerObjects(playerAmountStringForRegex_, playerAmount_, players_);  //TODO -- April 6, 2021; move setPlayerAmount() and setPlayerNames() into this initPlayerObject() function.
 }
 
 void Game::run(bool gO){
     // change to init game function Player player; //test 12:24pm
     
-    initGame();
+    initGame(playerAmountStringForRegex_, playerAmount_, players_);
     updateGame(gameOver_); //TODO -- may need to pass bool by reference here, somehow, & didn't work.
 }
 
@@ -66,8 +70,8 @@ void Game::setPlayerAmount(std::string &playerAmountString){
     }
 }   
 
-void Game::setPlayerNames(std::vector<std::string> &playerNames, int& l_playerAmount){ //todo -- Look into "std::unique_ptr<T[]>" instead of vector.
-    /* int l_playerAmount; */
+/*void Game::setPlayerNames(std::vector<std::string> &playerNames, int& l_playerAmount){ //todo -- Look into "std::unique_ptr<T[]>" instead of vector.
+    /* int l_playerAmount;
     l_playerAmount = getPlayerAmount();
     std::cout << "TEST 1 : getPlayerAmount() is : " << getPlayerAmount() << std::endl;
     std::cout << "TEST 2 : l_playerAmount = " << l_playerAmount << std::endl;
@@ -82,21 +86,46 @@ void Game::setPlayerNames(std::vector<std::string> &playerNames, int& l_playerAm
     }
 
 
-}
+} */
 
-void Game::initPlayerObjects(int numPlayers, std::vector<std::shared_ptr<Game>> vecOfPlayerPtrs){
+void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers, std::vector<std::shared_ptr<Player>> &players_){
+    //set number of players
+    setPlayerAmount(playerAmountStringForRegex_);
+    std::cout << "TEST IN INITGAME(){} 1 : playerAmountStringForRegex is : " << playerAmountStringForRegex_ << std::endl;
+    std::cout << "TEST: numPlayers is : " << numPlayers << std::endl;
+
     // init player objects
-        for(int i = 0; i <= numPlayers; i++){
-            std::shared_ptr<Game> sPtrGame = std::make_shared<Game>(Player* p = new Player p);
-            vecOfPlayerPtrs.emplace_back(sPtrGame);
-            std::cout << "TEST : sPtrGame is : " << sPtrGame << std::endl;
-        }
-        for (auto el: vecOfPlayerPtrs){
-            std::cout << "TEST 2 : el: vecOfPlayers is : " << el << std::endl;
-        }      
-        std::cout << "TEST 3 : returning from Game::initPlayerObjects(int numPlayers, std::vector<std::shared_ptr<Game>> Players){ }" << std::endl;  
-        return;
+    std::string inputone;
+    char inputtwo;
+    std::shared_ptr<Player> p1, p2, p3, p4;
+    std::array<std::shared_ptr<Player>, 4> arrayHoldingSmartPointers{p1, p2, p3, p4};
+    std::cout << "TEST: arrayHoldingSmartPointers.size() is : " << arrayHoldingSmartPointers.size() << std::endl;
+    std::cout << "TEST: players_.size() is : " << players_.size() << std::endl;
+    int count = 1;
+    for(auto &el: arrayHoldingSmartPointers){
+        if(numPlayers >= count){
+            std::cout << "Enter player "<< count << "'s name : ";
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cin >> inputone; // string name _N
+            std::cout << "Enter player " << count  << "'s symbol : ";
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cin >> inputtwo; // char symbol _S
+            players_.emplace_back(arrayHoldingSmartPointers[players_.size()] = std::make_shared<Player>(inputone, inputtwo));  //TODO -- LEFT OFF HERE--- April 6, 2021; 12:12pm.
+            std::cout << "TEST: inputone inputtwo are : " << inputone << " " << inputtwo << std::endl;
+            //std::cin.clear();
+            std::cout << "TEST: numPlayers is : " << numPlayers << std::endl;
+            std::cout << "TEST: players_.size() is : " << players_.size() << std::endl;
+            std::cout << &el << std::endl;
+            ++count;
+            std::cout << count << std::endl;
 
+        }
+        
+    }   
+    std::cout << "T : p1->name is : " << p1->getName() << std::endl;
+    std::cout << "T : p2->name is : " << p2->getName() << std::endl;
+    std::cout << "T : p3->name is : " << p3->getName() << std::endl;
+    std::cout << "T : p4->name is : " << p4->getName() << std::endl;
 }
 
 std::regex Game::getRegex(unsigned int max_players, std::string *numbers_text){
