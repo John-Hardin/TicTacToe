@@ -15,9 +15,4 @@
 <br /><a href='https://imgbb.com/' target='_blank'>upload images to ImgBB.com from here, if you want</a><br />
 
 
-<blockquote>
-```css
-body{ color: yellow;}
-```
-You're so much stronger than your excuses.
-</blockquote>
+<img src="http://fitbodyhq.wpengine.netdna-cdn.com/wp-content/uploads/2013/08/stronger-than-your-excuses.jpg" alt="motivational quote image, You are so much stronger than your excuses.">
