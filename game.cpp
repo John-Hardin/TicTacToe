@@ -23,7 +23,7 @@ void Game::initGame(std::string playerAmountStringForRegex_, int &playerAmount_,
     initPlayerObjects(playerAmountStringForRegex_, playerAmount_, players_);  //TODO -- April 6, 2021; move setPlayerAmount() and setPlayerNames() into this initPlayerObject() function.
 }
 
-void Game::run(bool gO){
+void Game::run(bool gO,std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::shared_ptr<Player>> players_){
     // change to init game function Player player; //test 12:24pm
     
     initGame(playerAmountStringForRegex_, playerAmount_, players_);
@@ -119,7 +119,7 @@ void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers, s
     }   
                 std::cout << "players_[i-1]->name_ OUTside for loop is : " << players_[i-1]->name_ << std::endl;
                 std::cout << "players_[i-1].use_count() OUTside for loop is : " << players_[i-1].use_count() << std::endl;  // TODO - April 8, 2021; 9:06pm, change shared_ptr to unique_ptr....
-}
+}                                                                                                                           // TODO - April 8, 2021; 10:37pm, seg fault, debug needed....  still need to try unique_ptr.
 
 std::regex Game::getRegex(unsigned int max_players, std::string *numbers_text){
     std::stringstream ss;
