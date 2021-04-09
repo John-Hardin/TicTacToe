@@ -16,6 +16,9 @@
 
 
 <blockquote>
-<pre><code color="yellow">  You're so much stronger than your excuses.
+<pre><code>  ```css 
+color: yellow;
+You're so much stronger than your excuses.
+```
 </code></pre>
 </blockquote>
