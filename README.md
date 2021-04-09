@@ -15,3 +15,7 @@
 <br /><a href='https://imgbb.com/' target='_blank'>upload images to ImgBB.com from here, if you want</a><br />
 
 
+<blockquote>
+<pre><code>  foo
+</code></pre>
+</blockquote>
