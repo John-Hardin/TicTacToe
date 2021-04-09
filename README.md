@@ -17,7 +17,7 @@
 
 <blockquote>
 ```css
-color: yellow;
+blockquote{ color: yellow;}
 You're so much stronger than your excuses.
 ```
 </blockquote>
