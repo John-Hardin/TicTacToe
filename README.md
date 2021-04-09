@@ -16,21 +16,6 @@
 
 
 <blockquote>
-<pre><code>  foo
+<pre><code>  You're so much stronger than your excuses.
 </code></pre>
 </blockquote>
-
-→foo→baz→→bim
-
-<pre><code>foo→baz→→bim
-</code></pre>
-
-  →foo→baz→→bim
-
-
-<pre><code>a→a
-ὐ→a
-</code></pre>
-
-    a→a
-    ὐ→a
