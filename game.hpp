@@ -11,9 +11,7 @@ class Game {
     int playerAmount_;
     bool gameOver_;
     std::string playerAmountStringForRegex_;
-    std::shared_ptr<Player> p1, p2, p3, p4;
-    std::vector<std::shared_ptr<Player>> players_;
-    //std::vector<std::string> playerNames_;  //changed to vector 3/21/2021
+    std::vector<std::shared_ptr<Player>> players_{};
     void updateBoard();
     void printBoard();
     

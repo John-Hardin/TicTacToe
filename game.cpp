@@ -98,28 +98,27 @@ void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers, s
     // init player objects
     std::string inputone;
     char inputtwo;
-    std::array<std::shared_ptr<Player>, 4> arrayHoldingSmartPointers{p1, p2, p3, p4};
-    std::cout << "T : arrayHoldingSmartPointers.size() is : " << arrayHoldingSmartPointers.size() << std::endl;
     std::cout << "T : players_.size() is : " << players_.size() << std::endl;
-    int i = 1;
-    while(numPlayers >= i){
+    int i =1;
+    for(i; numPlayers >= i; i++){
             std::cout << "Enter player "<< i << "'s name : ";
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cin >> inputone; // string name _N
             std::cout << "Enter player " << i  << "'s symbol : ";
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cin >> inputtwo; // char symbol _S
-            players_.push_back(arrayHoldingSmartPointers[players_.size()] = std::make_shared<Player>(inputone, inputtwo));  //TODO -- LEFT OFF HERE--- April 6, 2021; 12:12pm.
+            players_.push_back(std::make_shared<Player>(inputone, inputtwo));  //TODO -- LEFT OFF HERE--- April 6, 2021; 12:12pm.
             std::cout << "inputone inputtwo are : " << inputone << " " << inputtwo << std::endl;
             //std::cin.clear();
             std::cout << "numPlayers is : " << numPlayers << std::endl;
             std::cout << "players_.size() is : " << players_.size() << std::endl;
              //TODO - April 7, 2021; 11:51pm, ***smashing stack***, something is overrunning a buffer, likely the if statement and/or for loop are out of order or something.
-            std::cout << "arrayHoldingSmartPointers.at(players_.size()) : " << arrayHoldingSmartPointers.at(players_.size()) << std::endl;
-            std::cout << "p1.use_count INside for loop is : " << p1.use_count() << std::endl;
-            i++; std::cout << "i is " << i << std::endl;  //TODO - April 8, 2021; 5:50 am, try adding: p1->name_() or p1->getName() here and 2 lines below.
+            std::cout << "players_[i-1]->name_ INside for loop is : " << players_[i-1]->name_ << std::endl;
+            std::cout << "players_[i-1].use_count() INside for loop is : " << players_[i-1].use_count() << std::endl;
+            std::cout << "i is " << i << std::endl;  //TODO - April 8, 2021; 5:50 am, try adding: p1->name_() or p1->getName() here and 2 lines below.
     }   
-                std::cout << "p1.use_count OUTside for loop is : " << p1.use_count() << std::endl;
+                std::cout << "players_[i-1]->name_ OUTside for loop is : " << players_[i-1]->name_ << std::endl;
+                std::cout << "players_[i-1].use_count() OUTside for loop is : " << players_[i-1].use_count() << std::endl;  // TODO - April 8, 2021; 9:06pm, change shared_ptr to unique_ptr....
 }
 
 std::regex Game::getRegex(unsigned int max_players, std::string *numbers_text){
