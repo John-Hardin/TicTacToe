@@ -16,9 +16,8 @@
 
 
 <blockquote>
-<pre><code>  ```
-css color: yellow;
+```css
+color: yellow;
 You're so much stronger than your excuses.
 ```
-</code></pre>
 </blockquote>
