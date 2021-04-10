@@ -5,7 +5,7 @@
 int main(){
     Game game;
     //std::shared_ptr<Game> game = std::make_shared<Player>(&inputone);
-    game.run(game.getGameOver(),game.getPlayerAmountStringForRegex(), game.getPlayerAmount(), game.getPlayers());
+    game.run(game.getGameOver() ,game.getPlayerAmountStringForRegex(), game.getPlayerAmount(), game.players_);
     //while (!game.getGameOver()){
      //   game.run(game.getGameOver());
     //}

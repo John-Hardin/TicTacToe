@@ -8,6 +8,7 @@
 Game::Game()
 {
 
+
 }
 Game::~Game()
 {
@@ -15,19 +16,17 @@ Game::~Game()
 }
 /*---------------------------------------------------------------------------------*/
 /*----------------------------------------Game Stuff-------------------------------*/
-void Game::initGame(std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::shared_ptr<Player>> players_){  //TODO - April 7, 2021; 8:45pm, added the arguments here, but they are probably wrong.
-/*     setPlayerAmount(playerAmountStringForRegex_);
-    std::cout << "TEST IN INITGAME(){} 1 : playerAmountStringForRegex is : " << playerAmountStringForRegex_ << std::endl; */
-    
-    //setPlayerNames(playerNames_, playerAmount_);
-    initPlayerObjects(playerAmountStringForRegex_, playerAmount_, players_);  //TODO -- April 6, 2021; move setPlayerAmount() and setPlayerNames() into this initPlayerObject() function.
+void Game::initGame(std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::unique_ptr<Player>> players_){ 
+
+    initPlayerObjects(playerAmountStringForRegex_, playerAmount_, players_);  
 }
 
-void Game::run(bool gO,std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::shared_ptr<Player>> players_){
-    // change to init game function Player player; //test 12:24pm
+void Game::run(bool gO, std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::unique_ptr<Player>> players_){
     
+    std::array<std::unique_ptr<Player>, 4> ptrArray; //TODO - Left off here...  April 10, 2021; 2:32am.  
+
     initGame(playerAmountStringForRegex_, playerAmount_, players_);
-    updateGame(gameOver_); //TODO -- may need to pass bool by reference here, somehow, & didn't work.
+    updateGame(gO); 
 }
 
 void Game::updateGame(bool& gO){
@@ -35,11 +34,12 @@ void Game::updateGame(bool& gO){
 
     while(gO){
         updateBoard();
-        gameOver_ = true;  // TODO - toggle to end game gracefully vs leaving it open loop ended.
+        gO = true;  // TODO - toggle to end game gracefully vs leaving it open loop ended.
     }
 }
 /*-----------------------------------------------------------------------------------*/
 /*------------------------------------------Player Stuff-----------------------------*/
+
 void Game::setPlayerAmount(std::string &playerAmountString){ 
     const unsigned int max_players = 4;
     std::string numbers_text[] = {"one", "two", "three", "four"};
@@ -71,25 +71,7 @@ void Game::setPlayerAmount(std::string &playerAmountString){
     }
 }   
 
-/*void Game::setPlayerNames(std::vector<std::string> &playerNames, int& l_playerAmount){ //todo -- Look into "std::unique_ptr<T[]>" instead of vector.
-    /* int l_playerAmount;
-    l_playerAmount = getPlayerAmount();
-    std::cout << "TEST 1 : getPlayerAmount() is : " << getPlayerAmount() << std::endl;
-    std::cout << "TEST 2 : l_playerAmount = " << l_playerAmount << std::endl;
-    std::string pName;
-
-    for (int i = 1; i <= l_playerAmount; i++){  //TODO -- Look into "std::unique_ptr<T[]>" instead of vector.
-        std::cout << "Enter player " << i << "'s name : " << std::endl;
-        std::cin >> pName;
-        playerNames.emplace_back(pName);
-        std::cout << "TEST 3 : vector playerNames.back() is : " << playerNames.back() << std::endl;
-        std::cout << "TEST 4 : pName is : " << pName << std::endl;
-    }
-
-
-} */
-
-void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers, std::vector<std::shared_ptr<Player>> players_){
+void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers, std::vector<std::unique_ptr<Player>> players_){
     //set number of players
     setPlayerAmount(playerAmountStringForRegex_);
     std::cout << "playerAmountStringForRegex is : " << playerAmountStringForRegex_ << std::endl;
@@ -99,27 +81,25 @@ void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers, s
     std::string inputone;
     char inputtwo;
     std::cout << "T : players_.size() is : " << players_.size() << std::endl;
-    int i =1;
+    int i =0;
     for(i; numPlayers >= i; i++){
-            std::cout << "Enter player "<< i << "'s name : ";
+            std::cout << "Enter player "<< i+1 << "'s name : ";
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cin >> inputone; // string name _N
-            std::cout << "Enter player " << i  << "'s symbol : ";
+            std::cout << "Enter player " << i+1  << "'s symbol : ";
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cin >> inputtwo; // char symbol _S
-            players_.push_back(std::make_shared<Player>(inputone, inputtwo));  //TODO -- LEFT OFF HERE--- April 6, 2021; 12:12pm.
+            players_[i] =  std::make_unique<Player>(inputone, inputtwo);  //TODO -- LEFT OFF HERE--- April 6, 2021; 12:12pm.
             std::cout << "inputone inputtwo are : " << inputone << " " << inputtwo << std::endl;
             //std::cin.clear();
             std::cout << "numPlayers is : " << numPlayers << std::endl;
             std::cout << "players_.size() is : " << players_.size() << std::endl;
              //TODO - April 7, 2021; 11:51pm, ***smashing stack***, something is overrunning a buffer, likely the if statement and/or for loop are out of order or something.
             std::cout << "players_[i-1]->name_ INside for loop is : " << players_[i-1]->name_ << std::endl;
-            std::cout << "players_[i-1].use_count() INside for loop is : " << players_[i-1].use_count() << std::endl;
-            std::cout << "i is " << i << std::endl;  //TODO - April 8, 2021; 5:50 am, try adding: p1->name_() or p1->getName() here and 2 lines below.
+            std::cout << "i is " << i << std::endl;
     }   
                 std::cout << "players_[i-1]->name_ OUTside for loop is : " << players_[i-1]->name_ << std::endl;
-                std::cout << "players_[i-1].use_count() OUTside for loop is : " << players_[i-1].use_count() << std::endl;  // TODO - April 8, 2021; 9:06pm, change shared_ptr to unique_ptr....
-}                                                                                                                           // TODO - April 8, 2021; 10:37pm, seg fault, debug needed....  still need to try unique_ptr.
+}                                                                                                               // TODO - April 8, 2021; 10:37pm, seg fault, debug needed....  still need to try unique_ptr.
 
 std::regex Game::getRegex(unsigned int max_players, std::string *numbers_text){
     std::stringstream ss;
