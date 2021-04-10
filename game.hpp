@@ -11,7 +11,6 @@ class Game {
     int playerAmount_;
     bool gameOver_ = false;
     std::string playerAmountStringForRegex_;
-    //std::unique_ptr<Player> p1, p2, p3, p4;
     void updateBoard();
     void printBoard();
     
@@ -19,9 +18,10 @@ class Game {
 
 public:
     Game();
+    Game(Game&&) = default;
     ~Game();
-    void initGame(std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::unique_ptr<Player>> players_);
     void run(bool gO,std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::unique_ptr<Player>> players_);
+    void initGame(std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::unique_ptr<Player>> players_);
     void updateGame(bool& gO);
 
     void initPlayerObjects(std::string &playerAmountString, int &playerAmount_, std::vector<std::unique_ptr<Player>> players_);

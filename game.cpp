@@ -1,3 +1,4 @@
+#pragma once
 #include "game.hpp"
 #include <limits>
 //#include "player.hpp"
@@ -10,25 +11,32 @@ Game::Game()
 
 
 }
+Game::Game(Game&& rhs)
+{
+
+}
 Game::~Game()
 {
 
 }
-/*---------------------------------------------------------------------------------*/
 /*----------------------------------------Game Stuff-------------------------------*/
-void Game::initGame(std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::unique_ptr<Player>> players_){ 
-
-    initPlayerObjects(playerAmountStringForRegex_, playerAmount_, players_);  
-}
+/*---------------------------------------------------------------------------------*/
 
 void Game::run(bool gO, std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::unique_ptr<Player>> players_){
-    
-    std::array<std::unique_ptr<Player>, 4> ptrArray; //TODO - Left off here...  April 10, 2021; 2:32am.  
+    std::unique_ptr<Player> p1;
+    std::unique_ptr<Player> p2;
+    std::unique_ptr<Player> p3;
+    std::unique_ptr<Player> p4;
 
     initGame(playerAmountStringForRegex_, playerAmount_, players_);
     updateGame(gO); 
 }
-
+void Game::initGame(std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::unique_ptr<Player>> players_){ 
+    std::cout << "T : players_[2]->name_ ------>" << players_[2]->name_ << std::endl;
+    std::cout << "T : players_[2]->getName() ------>" << players_[2]->getName() << std::endl;
+    std::cout << "T : players_[2].get() ------>" << players_[2].get() << std::endl;
+    initPlayerObjects(playerAmountStringForRegex_, playerAmount_, players_);  
+}
 void Game::updateGame(bool& gO){
     //TODO -- need to add game loop here/game logic/while loop;3/21/2021 time stamp.
 
@@ -37,8 +45,8 @@ void Game::updateGame(bool& gO){
         gO = true;  // TODO - toggle to end game gracefully vs leaving it open loop ended.
     }
 }
-/*-----------------------------------------------------------------------------------*/
 /*------------------------------------------Player Stuff-----------------------------*/
+/*-----------------------------------------------------------------------------------*/
 
 void Game::setPlayerAmount(std::string &playerAmountString){ 
     const unsigned int max_players = 4;
@@ -81,7 +89,7 @@ void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers, s
     std::string inputone;
     char inputtwo;
     std::cout << "T : players_.size() is : " << players_.size() << std::endl;
-    int i =0;
+    int i =1;
     for(i; numPlayers >= i; i++){
             std::cout << "Enter player "<< i+1 << "'s name : ";
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -89,7 +97,7 @@ void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers, s
             std::cout << "Enter player " << i+1  << "'s symbol : ";
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cin >> inputtwo; // char symbol _S
-            players_[i] =  std::make_unique<Player>(inputone, inputtwo);  //TODO -- LEFT OFF HERE--- April 6, 2021; 12:12pm.
+            players_[i].swap(&&players_[i] = std::unique_ptr<Player>(inputone, inputtwo));  //TODO -- LEFT OFF HERE--- April 6, 2021; 12:12pm.
             std::cout << "inputone inputtwo are : " << inputone << " " << inputtwo << std::endl;
             //std::cin.clear();
             std::cout << "numPlayers is : " << numPlayers << std::endl;
@@ -129,8 +137,8 @@ std::map<int, std::regex> Game::get_regex_map(unsigned int max_players, std::str
     }
     return convert_table;
 }
-/*------------------------------------------------------------------------------------*/
 /*-------------------------------------------Board Stuff------------------------------*/
+/*------------------------------------------------------------------------------------*/
 void Game::updateBoard(){
 
 }
