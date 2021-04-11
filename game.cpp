@@ -27,14 +27,12 @@ void Game::run(bool gO, std::string playerAmountStringForRegex_, int &playerAmou
     // players_.emplace_back(p2);
     // players_.emplace_back(p3);
     // players_.emplace_back(p4);
-    initGame(playerAmountStringForRegex_, playerAmount_);
+    initGame();
     initPlayerObjects(playerAmountStringForRegex_, playerAmount_);
     updateGame(gO); 
 }
-void Game::initGame(std::string playerAmountStringForRegex_, int &playerAmount_){ 
-    std::cout << "T : players_[2]->name_ ------>" << players_[2]->name_ << std::endl;
-    std::cout << "T : players_[2]->getName() ------>" << players_[2]->getName() << std::endl;
-    std::cout << "T : players_[2].get() ------>" << players_[2].get() << std::endl;
+void Game::initGame(){ 
+
       
 }
 void Game::updateGame(bool& gO){
@@ -86,28 +84,27 @@ void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers){
     std::cout << "numPlayers is : " << numPlayers << std::endl;
 
     // init player objects
-    std::string inputone;
-    char inputtwo;
-    std::cout << "T : players_.size() is : " << players_.size() << std::endl;
-    int i =1;
-    for(i; numPlayers >= i; i++){
-            std::cout << "Enter player "<< i+1 << "'s name : ";
+    // std::string inputone;
+    // char inputtwo;
+    std::cout << "T : players_.size() is : " << players_.size() << std::endl;  //TODO - April 11, 2021; 5:52pm -- players_.size is 0, needs to be something else I think, dynamic maybe?
+    std::cout << "T : playerAmount_ is : " << playerAmount_ << std::endl;
+    for(int i = 0; playerAmount_ >= i; i++){
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cin >> inputone; // string name _N
+            std::cin.clear();
+            std::cout << "Enter player "<< (i+1) << "'s name : ";
+
+            std::cin >> players_[i]->name_; // string name _N
             std::cout << "Enter player " << i+1  << "'s symbol : ";
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cin >> inputtwo; // char symbol _S
-            players_[i]->name_ = inputone; players_[i]->symbol_ = inputtwo;  //TODO -- LEFT OFF HERE--- April 6, 2021; 12:12pm.
-            std::cout << "inputone inputtwo are : " << inputone << " " << inputtwo << std::endl;
-            //std::cin.clear();
+            std::cin.clear();
+            std::cin >> players_[i]->symbol_; // char symbol _S
             std::cout << "numPlayers is : " << numPlayers << std::endl;
             std::cout << "players_.size() is : " << players_.size() << std::endl;
              //TODO - April 7, 2021; 11:51pm, ***smashing stack***, something is overrunning a buffer, likely the if statement and/or for loop are out of order or something.
             std::cout << "players_[i-1]->name_ INside for loop is : " << players_[i-1]->name_ << std::endl;
             std::cout << "i is " << i << std::endl;
     }   
-                std::cout << "players_[i-1]->name_ OUTside for loop is : " << players_[i-1]->name_ << std::endl;
-}                                                                                                               // TODO - April 8, 2021; 10:37pm, seg fault, debug needed....  still need to try unique_ptr.
+}           // TODO - April 8, 2021; 10:37pm, seg fault, debug needed....  still need to try unique_ptr.
 
 std::regex Game::getRegex(unsigned int max_players, std::string *numbers_text){
     std::stringstream ss;

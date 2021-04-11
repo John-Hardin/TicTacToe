@@ -20,10 +20,10 @@ public:
     Game();
     ~Game();
     void run(bool gO,std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::unique_ptr<Player>> &players_);
-    void initGame(std::string playerAmountStringForRegex_, int &playerAmount_);
+    void initGame();
     void updateGame(bool& gO);
 
-    void initPlayerObjects(std::string &playerAmountString, int &playerAmount_);
+    void initPlayerObjects(std::string &playerAmountString, int &numPlayers);
 
     
     void setPlayerAmount(std::string &playerAmountString);
@@ -33,12 +33,6 @@ public:
     int& getPlayerAmount(){return playerAmount_;}
     bool getGameOver(){return gameOver_;}
     std::string getPlayerAmountStringForRegex(){return playerAmountStringForRegex_;}
-    std::string inputone;
-    char inputtwo;
-    std::unique_ptr<Player> p1 = std::make_unique<Player>(inputone, inputtwo);
-    std::unique_ptr<Player> p2 = std::make_unique<Player>(inputone, inputtwo);
-    std::unique_ptr<Player> p3 = std::make_unique<Player>(inputone, inputtwo);
-    std::unique_ptr<Player> p4 = std::make_unique<Player>(inputone, inputtwo);
  
     std::vector<std::unique_ptr<Player>> players_;
 
