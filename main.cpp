@@ -3,16 +3,8 @@
 
 
 int main(){
-    Game game;
-    //std::shared_ptr<Game> game = std::make_shared<Player>(&inputone);
+    Game game; // TODO - April 10, 2021; 8:02am, use Game c-tor to initialize player_ vector.
     game.run(game.getGameOver() ,game.getPlayerAmountStringForRegex(), game.getPlayerAmount(), game.players_);
-    //while (!game.getGameOver()){
-     //   game.run(game.getGameOver());
-    //}
-
-    // std::cout << game.use_count() << std::endl;
-    // std::cout << game << std::endl;
-
 
     return 0;
 }

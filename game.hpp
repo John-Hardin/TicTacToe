@@ -18,13 +18,12 @@ class Game {
 
 public:
     Game();
-    Game(Game&&) = default;
     ~Game();
-    void run(bool gO,std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::unique_ptr<Player>> players_);
-    void initGame(std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::unique_ptr<Player>> players_);
+    void run(bool gO,std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::unique_ptr<Player>> &players_);
+    void initGame(std::string playerAmountStringForRegex_, int &playerAmount_);
     void updateGame(bool& gO);
 
-    void initPlayerObjects(std::string &playerAmountString, int &playerAmount_, std::vector<std::unique_ptr<Player>> players_);
+    void initPlayerObjects(std::string &playerAmountString, int &playerAmount_);
 
     
     void setPlayerAmount(std::string &playerAmountString);
@@ -34,6 +33,13 @@ public:
     int& getPlayerAmount(){return playerAmount_;}
     bool getGameOver(){return gameOver_;}
     std::string getPlayerAmountStringForRegex(){return playerAmountStringForRegex_;}
+    std::string inputone;
+    char inputtwo;
+    std::unique_ptr<Player> p1 = std::make_unique<Player>(inputone, inputtwo);
+    std::unique_ptr<Player> p2 = std::make_unique<Player>(inputone, inputtwo);
+    std::unique_ptr<Player> p3 = std::make_unique<Player>(inputone, inputtwo);
+    std::unique_ptr<Player> p4 = std::make_unique<Player>(inputone, inputtwo);
+ 
     std::vector<std::unique_ptr<Player>> players_;
 
 };

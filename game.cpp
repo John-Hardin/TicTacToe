@@ -11,10 +11,6 @@ Game::Game()
 
 
 }
-Game::Game(Game&& rhs)
-{
-
-}
 Game::~Game()
 {
 
@@ -22,20 +18,24 @@ Game::~Game()
 /*----------------------------------------Game Stuff-------------------------------*/
 /*---------------------------------------------------------------------------------*/
 
-void Game::run(bool gO, std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::unique_ptr<Player>> players_){
-    std::unique_ptr<Player> p1;
-    std::unique_ptr<Player> p2;
-    std::unique_ptr<Player> p3;
-    std::unique_ptr<Player> p4;
-
-    initGame(playerAmountStringForRegex_, playerAmount_, players_);
+void Game::run(bool gO, std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::unique_ptr<Player>> &players_){
+    // std::unique_ptr<Player> p1;
+    // std::unique_ptr<Player> p2;
+    // std::unique_ptr<Player> p3;
+    // std::unique_ptr<Player> p4;
+    // players_.emplace_back(p1);
+    // players_.emplace_back(p2);
+    // players_.emplace_back(p3);
+    // players_.emplace_back(p4);
+    initGame(playerAmountStringForRegex_, playerAmount_);
+    initPlayerObjects(playerAmountStringForRegex_, playerAmount_);
     updateGame(gO); 
 }
-void Game::initGame(std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::unique_ptr<Player>> players_){ 
+void Game::initGame(std::string playerAmountStringForRegex_, int &playerAmount_){ 
     std::cout << "T : players_[2]->name_ ------>" << players_[2]->name_ << std::endl;
     std::cout << "T : players_[2]->getName() ------>" << players_[2]->getName() << std::endl;
     std::cout << "T : players_[2].get() ------>" << players_[2].get() << std::endl;
-    initPlayerObjects(playerAmountStringForRegex_, playerAmount_, players_);  
+      
 }
 void Game::updateGame(bool& gO){
     //TODO -- need to add game loop here/game logic/while loop;3/21/2021 time stamp.
@@ -79,7 +79,7 @@ void Game::setPlayerAmount(std::string &playerAmountString){
     }
 }   
 
-void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers, std::vector<std::unique_ptr<Player>> players_){
+void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers){
     //set number of players
     setPlayerAmount(playerAmountStringForRegex_);
     std::cout << "playerAmountStringForRegex is : " << playerAmountStringForRegex_ << std::endl;
@@ -97,7 +97,7 @@ void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers, s
             std::cout << "Enter player " << i+1  << "'s symbol : ";
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cin >> inputtwo; // char symbol _S
-            players_[i].swap(&&players_[i] = std::unique_ptr<Player>(inputone, inputtwo));  //TODO -- LEFT OFF HERE--- April 6, 2021; 12:12pm.
+            players_[i]->name_ = inputone; players_[i]->symbol_ = inputtwo;  //TODO -- LEFT OFF HERE--- April 6, 2021; 12:12pm.
             std::cout << "inputone inputtwo are : " << inputone << " " << inputtwo << std::endl;
             //std::cin.clear();
             std::cout << "numPlayers is : " << numPlayers << std::endl;
