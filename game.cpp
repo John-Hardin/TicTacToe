@@ -19,10 +19,10 @@ Game::~Game()
 /*---------------------------------------------------------------------------------*/
 
 void Game::run(){
-    std::unique_ptr<Player> p1 = std::make_unique<Player>(&Player());
-    std::unique_ptr<Player> p2 = std::make_unique<Player>(&Player());
-    std::unique_ptr<Player> p3 = std::make_unique<Player>(&Player());
-    std::unique_ptr<Player> p4 = std::make_unique<Player>(&Player());
+    std::unique_ptr<Player> p1 = std::make_unique<Player>(Player());
+    std::unique_ptr<Player> p2 = std::make_unique<Player>(Player());
+    std::unique_ptr<Player> p3 = std::make_unique<Player>(Player());
+    std::unique_ptr<Player> p4 = std::make_unique<Player>(Player());
     players_.emplace_back(std::move(p1));
     players_.emplace_back(std::move(p2));
     players_.emplace_back(std::move(p3));
