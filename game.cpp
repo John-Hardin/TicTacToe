@@ -103,7 +103,6 @@ void Game::initPlayerObjects(){
             players_[i]->setSymbol(tmp_symbolChar);
             std::cout << "playerAmount_ is : " << playerAmount_ << std::endl;
             std::cout << "players_.size() is : " << players_.size() << std::endl;
-             //TODO - April 7, 2021; 11:51pm, ***smashing stack***, something is overrunning a buffer, likely the if statement and/or for loop are out of order or something.
             std::cout << "players_[i-1]->name_ INside for loop is : " << players_[i-1]->getName() << std::endl;
             std::cout << "i is " << i << std::endl;
     }   
