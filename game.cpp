@@ -80,10 +80,7 @@ void Game::initPlayerObjects(){
     std::cout << "playerAmount_ is : " << playerAmount_ << std::endl;
 
     // init player objects
-    // std::string inputone;
-    // char inputtwo;
     std::cout << "T : players_.size() is : " << players_.size() << std::endl;  //TODO - April 11, 2021; 5:52pm -- players_.size is 0, needs to be something else I think, dynamic maybe?
-    std::cout << "T : playerAmount_ is : " << playerAmount_ << std::endl;
 
     for(int i = 0; playerAmount_ >= i; i++){
             std::cout << "players_[i].get() :" << players_[i].get() << std::endl;
