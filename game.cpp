@@ -82,7 +82,8 @@ void Game::initPlayerObjects(){
     // init player objects
     std::cout << "T : players_.size() is : " << players_.size() << std::endl;  //TODO - April 11, 2021; 5:52pm -- players_.size is 0, needs to be something else I think, dynamic maybe?
 
-    for(int i = 0; playerAmount_ >= i; i++){
+    for(int i = 0; playerAmount_ > i; i++){
+            std::cout << "Pre: i is " << i << std::endl;
             std::cout << "players_[i].get() :" << players_[i].get() << std::endl;
             std::string tmp_nameString;
             char tmp_symbolChar;
@@ -100,8 +101,10 @@ void Game::initPlayerObjects(){
             players_[i]->setSymbol(tmp_symbolChar);
             std::cout << "playerAmount_ is : " << playerAmount_ << std::endl;
             std::cout << "players_.size() is : " << players_.size() << std::endl;
-            std::cout << "players_[i-1]->name_ INside for loop is : " << players_[i-1]->getName() << std::endl;
-            std::cout << "i is " << i << std::endl;
+            std::cout << "players_[i]->getName() INside for loop is : " << players_[i]->getName() << std::endl;
+            std::cout << "players_[i]->name_ INside for loop is : " << players_[i]->getName() << std::endl;
+            std::cout << "Post: i is " << i << std::endl;
+
     }   
 }          
 
