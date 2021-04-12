@@ -19,10 +19,10 @@ class Game {
 public:
     Game();
     ~Game();
-    void run(bool gO,std::string playerAmountStringForRegex_, int &playerAmount_);
-    void updateGame(bool& gO);
+    void run();
+    void updateGame();
 
-    void initPlayerObjects(std::string &playerAmountString, int &numPlayers);
+    void initPlayerObjects();
 
     
     void setPlayerAmount(std::string &playerAmountString);

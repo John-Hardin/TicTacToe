@@ -18,25 +18,25 @@ Game::~Game()
 /*----------------------------------------Game Stuff-------------------------------*/
 /*---------------------------------------------------------------------------------*/
 
-void Game::run(bool gO, std::string playerAmountStringForRegex_, int &playerAmount_){
-    std::unique_ptr<Player> p1 = std::make_unique<Player>();
-    std::unique_ptr<Player> p2 = std::make_unique<Player>();
-    std::unique_ptr<Player> p3 = std::make_unique<Player>();
-    std::unique_ptr<Player> p4 = std::make_unique<Player>();
-    players_.emplace_back(p1);
-    players_.emplace_back(p2);
-    players_.emplace_back(p3);
-    players_.emplace_back(p4);
+void Game::run(){
+    std::unique_ptr<Player> p1;
+    std::unique_ptr<Player> p2;
+    std::unique_ptr<Player> p3;
+    std::unique_ptr<Player> p4;
+    players_.emplace_back(std::move(p1));
+    players_.emplace_back(std::move(p2));
+    players_.emplace_back(std::move(p3));
+    players_.emplace_back(std::move(p4));
     gameOver_ = false;
-    initPlayerObjects(playerAmountStringForRegex_, playerAmount_);
-    updateGame(gO); 
+    initPlayerObjects();
+    updateGame(); 
 }
-void Game::updateGame(bool& gO){
+void Game::updateGame(){
     //TODO -- need to add game loop here/game logic/while loop;3/21/2021 time stamp.
-
-    while(gO){
+    gameOver_ = false;
+    while(gameOver_){
         updateBoard();
-        gO = true;  // TODO - toggle to end game gracefully vs leaving it open loop ended.
+        gameOver_ = true;  // TODO - toggle to end game gracefully vs leaving it open loop ended.
     }
 }
 /*------------------------------------------Player Stuff-----------------------------*/
@@ -73,31 +73,38 @@ void Game::setPlayerAmount(std::string &playerAmountString){
     }
 }   
 
-void Game::initPlayerObjects(std::string &playerAmountString, int &numPlayers){
+void Game::initPlayerObjects(){
     //set number of players
     setPlayerAmount(playerAmountStringForRegex_);
     std::cout << "playerAmountStringForRegex is : " << playerAmountStringForRegex_ << std::endl;
-    std::cout << "numPlayers is : " << numPlayers << std::endl;
+    std::cout << "playerAmount_ is : " << playerAmount_ << std::endl;
 
     // init player objects
     // std::string inputone;
     // char inputtwo;
     std::cout << "T : players_.size() is : " << players_.size() << std::endl;  //TODO - April 11, 2021; 5:52pm -- players_.size is 0, needs to be something else I think, dynamic maybe?
     std::cout << "T : playerAmount_ is : " << playerAmount_ << std::endl;
-    for(int i = 0; playerAmount_ >= i; i++){
-            // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            // std::cin.clear();
-            std::cout << "Enter player "<< (i+1) << "'s name : ";
 
-            std::cin >> players_[i]->name_; // string name _N
+    for(int i = 0; playerAmount_ >= i; i++){
+            std::cout << "players_[i].get() :" << players_[i].get() << std::endl;
+            std::string tmp_nameString;
+            char tmp_symbolChar;
+        //sets name of playerObject pointed-to by std::unique_ptr object
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cin.clear();
+            std::cout << "Enter player "<< (i+1) << "'s name : ";
+            std::cin >> tmp_nameString; // string name _N
+            players_[i]->setName(tmp_nameString);
+
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cin.clear();
             std::cout << "Enter player " << i+1  << "'s symbol : ";
-            // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            // std::cin.clear();
-            std::cin >> players_[i]->symbol_; // char symbol _S
-            std::cout << "numPlayers is : " << numPlayers << std::endl;
+            std::cin >> tmp_symbolChar; // string name _N
+            players_[i]->setSymbol(tmp_symbolChar);
+            std::cout << "playerAmount_ is : " << playerAmount_ << std::endl;
             std::cout << "players_.size() is : " << players_.size() << std::endl;
              //TODO - April 7, 2021; 11:51pm, ***smashing stack***, something is overrunning a buffer, likely the if statement and/or for loop are out of order or something.
-            std::cout << "players_[i-1]->name_ INside for loop is : " << players_[i-1]->name_ << std::endl;
+            std::cout << "players_[i-1]->name_ INside for loop is : " << players_[i-1]->getName() << std::endl;
             std::cout << "i is " << i << std::endl;
     }   
 }          
