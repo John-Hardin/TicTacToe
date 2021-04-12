@@ -9,7 +9,7 @@
 
 class Game { 
     int playerAmount_;
-    bool gameOver_ = false;
+    bool gameOver_;
     std::string playerAmountStringForRegex_;
     void updateBoard();
     void printBoard();
@@ -19,8 +19,7 @@ class Game {
 public:
     Game();
     ~Game();
-    void run(bool gO,std::string playerAmountStringForRegex_, int &playerAmount_, std::vector<std::unique_ptr<Player>> &players_);
-    void initGame();
+    void run(bool gO,std::string playerAmountStringForRegex_, int &playerAmount_);
     void updateGame(bool& gO);
 
     void initPlayerObjects(std::string &playerAmountString, int &numPlayers);

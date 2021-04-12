@@ -5,7 +5,8 @@
 
 
 struct Player
-{
+{   
+    Player();
     Player( std::string _N, char _S){ std::cout << "Player is created : " << _N << " with symbol " << _S << std::endl; name_ = _N; symbol_ = _S; }
     Player(Player&&) = default;
     ~Player(){ std::cout << "Player " << name_ << " is destroyed." << std::endl; }
