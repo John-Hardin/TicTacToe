@@ -1,6 +1,7 @@
 #pragma once
 #include "game.hpp"
 #include <limits>
+#include <fstream>
 //#include "player.hpp"
 //#include <iostream>
 //#include <regex>
@@ -29,12 +30,15 @@ void Game::run(){
     players_.emplace_back(std::move(p4));
     gameOver_ = false;
     initPlayerObjects();
+    initBoard();
     updateGame(); 
 }
 void Game::updateGame(){
     //TODO -- need to add game loop here/game logic/while loop;3/21/2021 time stamp.
     gameOver_ = false;
     while(gameOver_){
+        updateBoard();
+        updatePlayers();
         updateBoard();
         gameOver_ = true;  // TODO - toggle to end game gracefully vs leaving it open loop ended.
     }
@@ -107,7 +111,9 @@ void Game::initPlayerObjects(){
 
     }   
 }          
-
+void Game::updatePlayers(){
+    
+}
 std::regex Game::getRegex(unsigned int max_players, std::string *numbers_text){
     std::stringstream ss;
     ss << "[1-";
@@ -138,6 +144,26 @@ std::map<int, std::regex> Game::get_regex_map(unsigned int max_players, std::str
 }
 /*-------------------------------------------Board Stuff------------------------------*/
 /*------------------------------------------------------------------------------------*/
+void Game::initBoard(){
+    std::string b3 = "board3.txt", b5 = "board5.txt", bS = "boardStar.txt";
+    std::cout << "What board would you like to play on?" << std::endl;
+    std::cout << "Your choices are a 3 by 3 board, a 5 by 5 board, or a star shaped board." << std::endl;
+    std::cout << "Enter 1, 2, or 3 respectively... " << std::endl;
+    std::regex r;
+
+
+
+    
+    char str[10000];
+    std::ifstream instream(b3,std::ios::in);
+    if(!instream.is_open()){
+        std::cout << "failed to open text file for board..." << std::endl;
+    } else {
+        instream.read(str, sizeof(str));
+        std::cout << str << std::endl;
+    }
+    
+}
 void Game::updateBoard(){
 
 }
