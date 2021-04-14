@@ -12,6 +12,7 @@ class Game {
     bool gameOver_;
     std::string playerAmountStringForRegex_;
     void updateBoard();
+    void updatePlayers();
     void printBoard();
     
     
@@ -21,7 +22,7 @@ public:
     ~Game();
     void run();
     void updateGame();
-
+    void initBoard();
     void initPlayerObjects();
 
     
