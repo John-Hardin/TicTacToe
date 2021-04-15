@@ -72,7 +72,7 @@ void Game::setPlayerAmount(std::string &playerAmountString){
                         std::cout << "playerAmount_ is : " << playerAmount_ << std::endl;
                     }
 
-                } return; 
+                }   return; 
         }
     }
 }   
@@ -118,7 +118,7 @@ std::regex Game::getRegex(unsigned int max_players, std::string *numbers_text){
     std::stringstream ss;
     ss << "[1-";
     ss << max_players;
-    std::cout << "TEST : max_players is " << max_players << std::endl;
+    //std::cout << "TEST : max_players is " << max_players << std::endl;
     ss << "]";
 
     for (unsigned int i = 0; i < max_players; i++){
@@ -145,11 +145,27 @@ std::map<int, std::regex> Game::get_regex_map(unsigned int max_players, std::str
 /*-------------------------------------------Board Stuff------------------------------*/
 /*------------------------------------------------------------------------------------*/
 void Game::initBoard(){
+    // hardcoded regex = 1|3|5|one|three|five|star|random|3x3|5x5|s|r
+    //std::string b_number_string;
+    //int board_number; ////// -- April 15 2021, 4:09am, these 3 lines are for later should I decide to make the regex validation not use a hardcoded expression.
+    std::string regex_board_string = "1|3|5|s|r|one|three|five|star|random|3x3|5x5|3by3|5by5|3 x 3|5 x 5|3 by 3|5 by 5";
+    std::regex board_reg_exp(regex_board_string, std::regex::icase);
     std::string b3 = "board3.txt", b5 = "board5.txt", bS = "boardStar.txt";
+    std::string input;
+
+
     std::cout << "What board would you like to play on?" << std::endl;
-    std::cout << "Your choices are a 3 by 3 board, a 5 by 5 board, or a star shaped board." << std::endl;
-    std::cout << "Enter 1, 2, or 3 respectively... " << std::endl;
-    std::regex r;
+    std::cout << "Your choices are : 3 by 3 board, 5 by 5 board, star shaped board, random shape." << std::endl;
+    std::cout << "Enter choice : ";
+    std::cin >> input;
+    while (!std::cin.fail()){
+        if (!std::regex_match(input, board_reg_exp)){
+            std::cout << "Input not recognized, try again." << std::endl;
+        } else {
+            std::cout << "Board choice input good" << std::endl;
+            
+        }
+    }
 
 
 
