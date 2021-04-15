@@ -150,7 +150,7 @@ void Game::initBoard(){
     //int board_number; ////// -- April 15 2021, 4:09am, these 3 lines are for later should I decide to make the regex validation not use a hardcoded expression.
     std::string regex_board_string = "1|3|5|s|r|one|three|five|star|random|3x3|5x5|3by3|5by5|3 x 3|5 x 5|3 by 3|5 by 5";
     std::regex board_reg_exp(regex_board_string, std::regex::icase);
-    std::string b3 = "board3.txt", b5 = "board5.txt", bS = "boardStar.txt";
+    std::string b3 = "boards/board3by3.txt", b5 = "boards/board5by5.txt", bS = "boards/boardStar.txt", bR = "boards/boardRandom.txt";
     std::string input;
 
 
@@ -161,8 +161,19 @@ void Game::initBoard(){
     while (!std::cin.fail()){
         if (!std::regex_match(input, board_reg_exp)){
             std::cout << "Input not recognized, try again." << std::endl;
+            initBoard();
         } else {
             std::cout << "Board choice input good" << std::endl;
+            char str[10000];
+            std::ifstream instream(b3,std::ios::in);
+            if(!instream.is_open()){
+                std::cout << "failed to open text file for board..." << std::endl;
+                initBoard();
+            } else {
+                instream.read(str, sizeof(str));
+                std::cout << str << std::endl;
+                return;
+            }
             
         }
     }
@@ -170,14 +181,7 @@ void Game::initBoard(){
 
 
     
-    char str[10000];
-    std::ifstream instream(b3,std::ios::in);
-    if(!instream.is_open()){
-        std::cout << "failed to open text file for board..." << std::endl;
-    } else {
-        instream.read(str, sizeof(str));
-        std::cout << str << std::endl;
-    }
+
     
 }
 void Game::updateBoard(){
