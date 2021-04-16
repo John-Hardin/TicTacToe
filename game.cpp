@@ -72,7 +72,7 @@ void Game::setPlayerAmount(std::string &playerAmountString){
                         std::cout << "playerAmount_ is : " << playerAmount_ << std::endl;
                     }
 
-                }   return; 
+                }   return; //TODO April 15, 2021; 10:00pm, change this while loop, to maybe an if statement, and also the while loop in initboard() function below.
         }
     }
 }   
@@ -163,16 +163,17 @@ void Game::initBoard(){
             std::cout << "Input not recognized, try again." << std::endl;
             initBoard();
         } else {
-            std::cout << "Board choice input good" << std::endl;
-            char str[10000];
+
             std::ifstream instream(b3,std::ios::in);
             if(!instream.is_open()){
                 std::cout << "failed to open text file for board..." << std::endl;
                 initBoard();
             } else {
-                instream.read(str, sizeof(str));
-                std::cout << str << std::endl;
-                return;
+                    std::cout << "Board choice input good" << std::endl;
+                    char str[10000];
+                    instream.read(str, sizeof(str));
+                    std::cout << str;
+                    return;  //TODO April 15, 2021; 10:00pm, initBoard should not print, just store the board data, and store it so it's manipulatable.
             }
             
         }
