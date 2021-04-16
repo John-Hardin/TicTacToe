@@ -11,9 +11,9 @@ class Game {
     int playerAmount_;
     bool gameOver_;
     std::string playerAmountStringForRegex_;
-    void updateBoard();
+    void updateBoard(std::string &INput);
     void updatePlayers();
-    void printBoard();
+    void printBoard(std::string Input);
     
     
 
@@ -21,8 +21,8 @@ public:
     Game();
     ~Game();
     void run();
-    void updateGame();
-    void initBoard();
+    void updateGame(std::string &INPut);
+    std::string initBoard();
     void initPlayerObjects();
 
     

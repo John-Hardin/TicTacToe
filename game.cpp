@@ -30,17 +30,16 @@ void Game::run(){
     players_.emplace_back(std::move(p4));
     gameOver_ = false;
     initPlayerObjects();
-    initBoard();
-    updateGame(); 
+    std::string INPUT = initBoard();
+    updateGame(INPUT); 
 }
-void Game::updateGame(){
+void Game::updateGame(std::string &INPut){
     //TODO -- need to add game loop here/game logic/while loop;3/21/2021 time stamp.
     gameOver_ = false;
     while(gameOver_){
-        updateBoard();
         updatePlayers();
-        updateBoard();
-        gameOver_ = true;  // TODO - toggle to end game gracefully vs leaving it open loop ended.
+        updateBoard(INPut);
+        gameOver_ = true;  //--toggle to end game gracefully vs leaving it open loop ended.
     }
 }
 /*------------------------------------------Player Stuff-----------------------------*/
@@ -144,7 +143,7 @@ std::map<int, std::regex> Game::get_regex_map(unsigned int max_players, std::str
 }
 /*-------------------------------------------Board Stuff------------------------------*/
 /*------------------------------------------------------------------------------------*/
-void Game::initBoard(){
+std::string Game::initBoard(){
     // hardcoded regex = 1|3|5|one|three|five|star|random|3x3|5x5|s|r
     //std::string b_number_string;
     //int board_number; ////// -- April 15 2021, 4:09am, these 3 lines are for later should I decide to make the regex validation not use a hardcoded expression.
@@ -158,7 +157,6 @@ void Game::initBoard(){
     std::cout << "Your choices are : 3 by 3 board, 5 by 5 board, star shaped board, random shape." << std::endl;
     std::cout << "Enter choice : ";
     std::cin >> input;
-    while (!std::cin.fail()){
         if (!std::regex_match(input, board_reg_exp)){
             std::cout << "Input not recognized, try again." << std::endl;
             initBoard();
@@ -170,24 +168,20 @@ void Game::initBoard(){
                 initBoard();
             } else {
                     std::cout << "Board choice input good" << std::endl;
-                    char str[10000];
+                    char str[5000];
                     instream.read(str, sizeof(str));
-                    std::cout << str;
-                    return;  //TODO April 15, 2021; 10:00pm, initBoard should not print, just store the board data, and store it so it's manipulatable.
+                    return input;
+                    //std::cout << str;
+                    //return;  //TODO April 15, 2021; 10:00pm, initBoard should not print, just store the board data, and store it so it's manipulatable.
             }
-            
         }
-    }
-
-
-
-    
-
-    
 }
-void Game::updateBoard(){
-
+void Game::updateBoard(std::string &INput){
+    printBoard(INput);
 }
-void Game::printBoard(){
-
+void Game::printBoard(std::string Input){
+    std::ifstream instream(Input,std::ios::in);
+    char In [5000];
+    instream.read(In, sizeof(Input));
+    std::cout << In;
 }
